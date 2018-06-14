@@ -1,11 +1,16 @@
 <template>
   <div>
-
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>Main</el-main>
+      <el-footer>Footer</el-footer>
+    </el-container>
   </div>
 </template>
 
 <script>
   export default {
+    name: 'Layout',
     data(){
       return{
         guessCity: '',   //当前城市
@@ -15,22 +20,7 @@
       }
     },
     mounted(){
-      // 获取当前城市
-      cityGuess().then(res => {
-        this.guessCity = res.name;
-        this.guessCityid = res.id;
-      })
-      //获取热门城市
-      hotcity().then(res => {
-        this.hotcity = res;
-      })
-      //获取所有城市
-      groupcity().then(res => {
-        this.groupcity = res;
-      })
-    },
-    components:{
-      headTop
+
     },
     computed:{
       //将获取的数据按照A-Z字母开头排序
