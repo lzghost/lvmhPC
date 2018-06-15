@@ -12,11 +12,14 @@ import {
   Loading,
   MessageBox,
   Message,
-  Notification } from 'element-ui'
+  Notification,
+  Input,
+  Form
+} from 'element-ui'
 import App from './App'
 import router from './router'
 import store from './store/state'
-
+import './style/common.css'
 
 Vue.use(Button)
 Vue.use(Container)
@@ -25,6 +28,8 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Footer)
 Vue.use(Loading.directive)
+Vue.use(Input)
+Vue.use(Form)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
