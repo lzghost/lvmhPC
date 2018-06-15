@@ -14,7 +14,8 @@ import {
   Message,
   Notification,
   Input,
-  Form
+  Form,
+  FormItem
 } from 'element-ui'
 import App from './App'
 import router from './router'
@@ -30,6 +31,7 @@ Vue.use(Footer)
 Vue.use(Loading.directive)
 Vue.use(Input)
 Vue.use(Form)
+Vue.use(FormItem)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

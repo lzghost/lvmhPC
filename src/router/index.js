@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '../layout/index'
 import Home from '../pages/home/Home'
+import Temp from '../pages/home/Temp.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -14,6 +15,10 @@ export default new Router({
     {
       path: '/home',
       component: Home,
+    },
+    {
+      path: '/temp',
+      component: Temp
     }
   ]
 })
