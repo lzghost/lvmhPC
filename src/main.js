@@ -15,10 +15,16 @@ import {
   Notification,
   Input,
   Form,
-  FormItem
+  FormItem,
+  Carousel,
+  CarouselItem,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
 } from 'element-ui'
 import App from './App'
-import router from './router'
+import routes from './router'
 import store from './store/state'
 import './style/common.css'
 
@@ -32,6 +38,12 @@ Vue.use(Loading.directive)
 Vue.use(Input)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
@@ -42,11 +54,10 @@ Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
-
-const routerConfig = new VueRouter({
-  router,
-  mode: 'hash',
-  strict: true,
+Vue.use(VueRouter)
+console.log(routes)
+const router = new VueRouter({
+  routes,
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

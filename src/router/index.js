@@ -1,24 +1,36 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Layout from '../layout/index'
-import Home from '../pages/home/Home'
+// import Router from 'vue-router'
+import App from '../App.vue'
+import Layout from "../layout/index";
+import Login from "../pages/login/Login.vue";
+import Home from "../pages/home/Home";
+import Activity from "../pages/activity/Activity.vue";
 // import Temp from '../pages/home/Temp.vue'
-Vue.use(Router)
+// Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Layout',
-      component: Layout,
-    },
-    {
-      path: '/home',
-      component: Home,
-    },
-    // {
-    //   path: '/temp',
-    //   component: Temp
-    // }
-  ]
-})
+export default [
+  {
+    path: '/',
+    component: App,
+    children: [
+      {
+        path: 'login',
+        component: Login,
+      },
+      {
+        path: 'home',
+        component: Home,
+        meta: {keepAlive: true}
+      },
+      {
+        path: 'activity',
+        component: Activity,
+      }
+    ]
+  },
+
+  // {
+  //   path: '/temp',
+  //   component: Temp
+  // }
+]
+

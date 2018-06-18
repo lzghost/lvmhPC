@@ -1,34 +1,33 @@
 <template>
-  <div class="container">
-    <div class="logo"></div>
-    <div class="words">Internal purchase</div>
-    <!--登录部分 start-->
-    <el-form :model="loginForm" ref="loginForm" label-width="100px" class="loginFormStyle">
-      <el-form-item prop="userName">
-        <el-input
-          v-model="loginForm.userName"
-          auto-complete="off">
-          <i slot="prefix">
-            <img src="../../assets/icon/user.png" alt="">
-          </i>
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="passWord">
-        <el-input
-          type="password"
-          v-model="loginForm.passWord"
-          auto-complete="off">
-          <i slot="prefix">
-            <img src="../../assets/icon/password.png" alt="">
-          </i>
-        </el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button>提交</el-button>
-      </el-form-item>
-    </el-form>
-    <!--登录部分 end-->
-  </div>
+  <el-container>
+    <el-header>
+      <el-menu
+        :default-active="activeIndex2"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1">处理中心</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">我的工作台</template>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+            <el-menu-item index="2-4-2">选项2</el-menu-item>
+            <el-menu-item index="2-4-3">选项3</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="3" disabled>消息中心</el-menu-item>
+      </el-menu>
+    </el-header>
+    <el-main>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -55,38 +54,5 @@
 </script>
 
 <style scoped>
-  /*设置背景图*/
-  .container{
-    width:100%;
-    height:100%;
-    background:url('../../assets/banner-Trail.png') no-repeat center;
-    background-size:100% auto;
-  }
-  .container:before{
-    content: "";
-    display: table;
-  }
-  .logo{
-    width:339px;
-    height:60px;
-    margin:auto;
-    margin-top:185px;
-    background-image:url('../../assets/logo.png');
-    background-size:100% 100%;
-  }
-  .words{
-    margin:auto;
-    margin-top:49px;
-    margin-bottom:68px;
-    font-size:36px;
-    line-height:50px;
-    color:#fff;
-  }
-  .loginFormStyle{
-    width:400px;
-    margin:auto;
-  }
-  .loginFormStyle .el-input .el-input__inner{
-    height:52px !important;
-  }
+
 </style>
