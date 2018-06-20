@@ -22,6 +22,9 @@ import {
   Submenu,
   MenuItem,
   MenuItemGroup,
+  Row,
+  Col,
+  Popover,
 } from 'element-ui'
 import App from './App'
 import routes from './router'
@@ -44,6 +47,9 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Popover)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
