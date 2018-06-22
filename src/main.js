@@ -25,6 +25,9 @@ import {
   Row,
   Col,
   Popover,
+  Card,
+  Dialog,
+  InputNumber,
 } from 'element-ui'
 import App from './App'
 import routes from './router'
@@ -50,6 +53,9 @@ Vue.use(MenuItemGroup)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Popover)
+Vue.use(Card)
+Vue.use(Dialog)
+Vue.use(InputNumber)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

@@ -4,7 +4,7 @@ import Layout from "../layout/index";
 import Login from "../pages/login/Login.vue";
 import Home from "../pages/home/Home";
 import Activity from "../pages/activity/Activity.vue";
-// import Temp from '../pages/home/Temp.vue'
+import Temp from '../components/cart/PopCart.vue'
 // Vue.use(Router)
 
 export default [
@@ -27,10 +27,9 @@ export default [
       }
     ]
   },
-
-  // {
-  //   path: '/temp',
-  //   component: Temp
-  // }
+  {
+    path: '/temp',
+    component: Temp
+  }
 ]
 
