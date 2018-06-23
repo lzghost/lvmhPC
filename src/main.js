@@ -28,6 +28,9 @@ import {
   Card,
   Dialog,
   InputNumber,
+  Breadcrumb,
+  BreadcrumbItem,
+  Pagination
 } from 'element-ui'
 import App from './App'
 import routes from './router'
@@ -56,6 +59,9 @@ Vue.use(Popover)
 Vue.use(Card)
 Vue.use(Dialog)
 Vue.use(InputNumber)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Pagination)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

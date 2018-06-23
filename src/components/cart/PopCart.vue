@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialogFormVisible" width="500px" top="15vh">
+  <el-dialog :visible.sync="isShow" width="500px" top="15vh">
     <div slot="title" class="title">
       <el-row :gutter="0">
         <el-col :span="5">
@@ -78,17 +78,17 @@
     name: '',
     data(){
       return {
-        dialogFormVisible: true,
         count: 1,
       }
     },
+    props: ['isShow', 'headTitle', 'goBack'],
     mounted() {
 
     },
     mounted(){
 
     },
-    method(){
+    methods: {
 
     }
   }

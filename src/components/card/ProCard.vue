@@ -1,5 +1,5 @@
 <template>
-  <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }">
+  <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }" shadow="never">
     <img src="../../assets/skincare-1.png" class="image">
     <el-row :gutter="0" class="desc">
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
@@ -37,6 +37,7 @@
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div style="text-align: right">
           <el-button type="text"><img src="../../assets/icon/cart.png" alt="" @click="openPop"></el-button>
+          <PopCart :isShow="isShow"/>
         </div>
       </el-col>
     </el-row>
@@ -44,17 +45,23 @@
 </template>
 
 <script>
+  import PopCart from '../../components/cart/PopCart.vue'
   export default {
     name: 'ProCard',
     data(){
-      return {}
+      return {
+          isShow: false,
+      }
+    },
+    components:{
+      PopCart
     },
     mounted() {
 
     },
     methods: {
       openPop(){
-          console.log(1);
+          this.isShow = true
       }
     }
   }
@@ -63,6 +70,7 @@
 <style scoped>
   .el-card{
     text-align: center;
+    border: 0;
   }
   .el-button{
     padding: 0;
