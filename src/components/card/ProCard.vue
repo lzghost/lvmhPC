@@ -4,39 +4,36 @@
         <img src="../../assets/skincare-1.png" class="image">
     </router-link>
     <el-row :gutter="0" class="desc">
-      <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+      <el-col :span="12">
         <div class="code">
           F084055009
         </div>
       </el-col>
-      <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+      <el-col :span="12">
         <div class="stock">
           库存：500
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="0" class="pro">
-      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+      <el-col :span="24">
         <div>
           克丽丝汀迪奥真我情柔淡香氛 100ml
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="0" class="priceCard">
-      <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5">
+      <el-col :span="5">
         <div class="priceNow">
           ￥300
         </div>
       </el-col>
-      <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1">
-        &nbsp;
-      </el-col>
-      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" style="height: 100%;">
+      <el-col :offset="1" :span="6" style="height: 100%;">
         <div class="original">
           ¥2,100
         </div>
       </el-col>
-      <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+      <el-col :span="12">
         <div style="text-align: right">
           <el-button type="text"><img src="../../assets/icon/cart.png" alt="" @click="openPop"></el-button>
           <PopCart :isShow="isShow"/>

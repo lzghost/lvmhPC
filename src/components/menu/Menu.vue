@@ -112,7 +112,7 @@
 
 <style scoped>
   .el-row {
-    background-color: black;
+    background-color: #333333;
     height: 100%;
     color: white;
     text-align: center;
