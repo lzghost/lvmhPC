@@ -30,7 +30,11 @@ import {
   InputNumber,
   Breadcrumb,
   BreadcrumbItem,
-  Pagination
+  Pagination,
+  Tabs,
+  TabPane,
+  Table,
+  TableColumn
 } from 'element-ui'
 import App from './App'
 import routes from './router'
@@ -62,6 +66,10 @@ Vue.use(InputNumber)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Pagination)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Table);
+Vue.use(TableColumn);
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

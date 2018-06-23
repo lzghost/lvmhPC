@@ -1,8 +1,5 @@
 <template>
   <el-container class="container">
-    <el-header>
-      <Menu/>
-    </el-header>
     <el-main>
       <el-row>
         <el-breadcrumb separator="/">
@@ -32,10 +29,6 @@
         </el-col>
       </el-row>
     </el-main>
-    <el-footer>
-      @2018 LVMH
-
-    </el-footer>
   </el-container>
 </template>
 
