@@ -4,6 +4,7 @@ import Layout from "../layout/index";
 import Login from "../pages/login/Login.vue";
 import Home from "../pages/home/Home";
 import Activity from "../pages/activity/Activity.vue";
+import GoodDetail from '../pages/good/Detail.vue'
 import Temp from '../components/cart/PopCart.vue'
 // Vue.use(Router)
 
@@ -24,7 +25,11 @@ export default [
       {
         path: 'activity',
         component: Activity,
-      }
+      },
+      {
+        path: 'goodDetail',
+        component: GoodDetail,
+      },
     ]
   },
   {

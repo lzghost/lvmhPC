@@ -1,6 +1,8 @@
 <template>
   <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }" shadow="never">
-    <img src="../../assets/skincare-1.png" class="image">
+    <router-link :to="{path: '/goodDetail', query: {}}">
+        <img src="../../assets/skincare-1.png" class="image">
+    </router-link>
     <el-row :gutter="0" class="desc">
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="code">
