@@ -1,27 +1,31 @@
 <template>
-  <div>
-
-  </div>
 </template>
 
 <script>
+  import {mapMutations} from 'vuex'
+
   export default {
-    name: '',
     data(){
       return {
-
       }
     },
-    mounted() {
-
+    async beforeMount(){
     },
     mounted(){
+    },
+    components: {
+    },
+    computed: {
 
     },
-    method(){
+    methods: {
+
+    },
+    watch: {
 
     }
   }
+
 </script>
 
 <style scoped>
