@@ -53,3 +53,17 @@ body{
 .el-main{
   padding: 0;
 }
+
+input{
+  height: 100% !important;
+}
+
+.login-wrapper input{
+  background-color: transparent;
+  color: white;
+}
+
+.login-wrapper .el-input-group__prepend{
+  background-color: transparent;
+  color: white;
+}
