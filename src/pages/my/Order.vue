@@ -12,13 +12,22 @@
       <el-col :span="8" :offset="8">
         <div class="">
           GIVENCHY
-
         </div>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="18" :offset="3">
-        <Order />
+        <el-tabs type="border-card" :stretch="true">
+          <el-tab-pane label="全部订单">
+            <Order />
+          </el-tab-pane>
+          <el-tab-pane label="未付款">
+
+          </el-tab-pane>
+          <el-tab-pane label="已付款">
+
+          </el-tab-pane>
+        </el-tabs>
       </el-col>
     </el-row>
   </el-main>
