@@ -27,3 +27,20 @@ export const removeStore = name => {
   if (!name) return;
   window.localStorage.removeItem(name);
 }
+
+
+//设备检测  是移动端返回true；PC端返回false
+export function detect() {
+  if( navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+  ){
+    return true;
+  }
+  return false;
+}
+
