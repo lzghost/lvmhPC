@@ -120,6 +120,7 @@ export default {
 .loginFormStyle-mb {
   margin: auto;
   margin-top: 24%;
+  margin-bottom: 5%;
   color:white;
 }
 
