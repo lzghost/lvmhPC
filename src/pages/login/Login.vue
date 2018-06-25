@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width:100%;height:100%">
     <div class="container login-wrapper" v-if="global.isPc === true">
       <div class="logo"></div>
       <div class="words">Internal purchase</div>
@@ -25,86 +25,129 @@
         <!--登录部分 end-->
       </el-col>
     </div>
-    <div v-if="global.isPc === false">
-      
+    <div class="container-mb login-mb-wrapper"  v-if="global.isPc === false">
+      <div class="content"></div>
+      <div class="logo-mb"></div>
+      <div class="loginFormStyle-mb">
+        <mt-cell>
+          <mt-field label="" placeholder="请输入用户名" >
+          </mt-field>
+          <img slot="icon" src="../../assets/mobile/user.png" width="21" height="24">
+        </mt-cell>
+        <mt-cell>
+          <mt-field label="" placeholder="请输入密码" >
+          </mt-field>
+          <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
+        </mt-cell>
+      </div>        
+      <mt-button plain type="default" size="large">登录</mt-button>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
-  export default {
-    name: 'Home',
-    data(){
-      return {
-        loginForm:{
-          userName:'',
-          passWord:''
-        }
-      }
-    },
-    mounted() {
-      
-    },
-    computed: {
-      ...mapState([
-        'global'
-      ]),
-    },
-    methods:{
+import { mapState, mapMutations } from "vuex";
 
-    }
-  }
+export default {
+  name: "Home",
+  data() {
+    return {
+      loginForm: {
+        userName: "",
+        passWord: ""
+      }
+    };
+  },
+  mounted() {},
+  computed: {
+    ...mapState(["global"])
+  },
+  methods: {}
+};
 </script>
 
 <style scoped>
-  /*设置背景图*/
-  .container{
-    width:100%;
-    height:100%;
-    background:url('../../assets/pc-bg.png') no-repeat center;
-    background-size:100% 100%;
-  }
-  .container:before{
-    content: "";
-    display: table;
-  }
-  .container .logo{
-    width:339px;
-    height:60px;
-    margin:auto;
-    margin-top: 10%;
-    background-image:url('../../assets/logo.png');
-    background-size:100% 100%;
-  }
-  .words{
-    margin-top:49px;
-    margin-bottom:68px;
-    font-size:36px;
-    line-height:50px;
-    color:#fff;
-  }
-  .loginFormStyle{
-    margin:auto;
-  }
+/*设置背景图*/
+.container {
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/pc-bg.png") no-repeat center;
+  background-size: 100% 100%;
+}
+.container-mb {
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/app-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  text-align: center;
+}
+.container:before {
+  content: "";
+  display: table;
+}
+.logo-mb {
+  background-image: url("../../assets/logo-mb.png");
+  background-size: 100% 100%;
+  width: 226px;
+  height: 40px;
+  margin: auto;
+}
 
-  .input-login{
-    height: 52px;
-    border-radius: 8px;
-    border: 1px solid rgba(224, 227, 229, 1);
-    background-color: transparent;
-    color: white;
-  }
-  .el-input__inner{
-    background-color: transparent;
-    color: white;
-  }
-  .loginBtn{
-    height: 52px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid rgba(224, 227, 229, 1);
-    background-color: transparent;
-    color: white;
-  }
+.content {
+  height: 30%;
+}
+
+.container .logo {
+  width: 339px;
+  height: 60px;
+  margin: auto;
+  margin-top: 10%;
+  background-image: url("../../assets/logo.png");
+  background-size: 100% 100%;
+}
+
+.words {
+  margin-top: 49px;
+  margin-bottom: 68px;
+  font-size: 36px;
+  line-height: 50px;
+  color: #fff;
+}
+.loginFormStyle {
+  margin: auto;
+}
+
+.loginFormStyle-mb {
+  margin: auto;
+  margin-top: 24%;
+  color:white;
+}
+
+.input-login {
+  height: 52px;
+  border-radius: 8px;
+  border: 1px solid rgba(224, 227, 229, 1);
+  background-color: transparent;
+  color: white;
+}
+.el-input__inner {
+  background-color: transparent;
+  color: white;
+}
+.loginBtn {
+  height: 52px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(224, 227, 229, 1);
+  background-color: transparent;
+  color: white;
+}
+.mint-cell{
+  background-color: transparent;
+  color: white;
+}
+.mint-button{
+  color: white;
+  background-color: transparent;
+}
 </style>
