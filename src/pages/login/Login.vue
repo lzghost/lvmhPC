@@ -1,33 +1,38 @@
 <template>
-  <div class="container login-wrapper">
-    <div class="logo"></div>
-    <div class="words">Internal purchase</div>
-    <!--登录部分 start-->
-    <el-col :span="6" :offset="9">
-      <el-form :model="loginForm" ref="loginForm" class="loginFormStyle">
-        <el-form-item prop="userName">
-          <el-input class="input-login"
-                    v-model="loginForm.userName"
-                    auto-complete="off">
-            <img slot="prepend" src="../../assets/icon/user.png" style="background-color: transparent">
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="passWord" size="large">
-          <el-input type="password" clearable resize="both" class="input-login" v-model="loginForm.passWord" placeholder="请输入密码" >
-            <img slot="prepend" src="../../assets/icon/password.png" alt="">
-          </el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button class="loginBtn">登录</el-button>
-        </el-form-item>
-      </el-form>
-      <!--登录部分 end-->
-    </el-col>
-
+  <div>
+    <div class="container login-wrapper" v-if="global.isPc === true">
+      <div class="logo"></div>
+      <div class="words">Internal purchase</div>
+      <!--登录部分 start-->
+      <el-col :span="6" :offset="9">
+        <el-form :model="loginForm" ref="loginForm" class="loginFormStyle">
+          <el-form-item prop="userName">
+            <el-input class="input-login"
+                      v-model="loginForm.userName"
+                      auto-complete="off">
+              <img slot="prepend" src="../../assets/icon/user.png" style="background-color: transparent">
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="passWord" size="large">
+            <el-input type="password" clearable resize="both" class="input-login" v-model="loginForm.passWord" placeholder="请输入密码" >
+              <img slot="prepend" src="../../assets/icon/password.png" alt="">
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button class="loginBtn">登录</el-button>
+          </el-form-item>
+        </el-form>
+        <!--登录部分 end-->
+      </el-col>
+    </div>
+    <div v-if="global.isPc === false">
+      
+    </div>
   </div>
 </template>
 
 <script>
+import {mapState, mapMutations} from 'vuex'
   export default {
     name: 'Home',
     data(){
@@ -39,7 +44,12 @@
       }
     },
     mounted() {
-
+      
+    },
+    computed: {
+      ...mapState([
+        'global'
+      ]),
     },
     methods:{
 
@@ -54,7 +64,6 @@
     height:100%;
     background:url('../../assets/pc-bg.png') no-repeat center;
     background-size:100% 100%;
-    font-size: 100px;
   }
   .container:before{
     content: "";
