@@ -6,6 +6,7 @@ import Activity from "../pages/activity/Activity.vue";
 import GoodDetail from "../pages/good/Detail.vue";
 import Temp from "../components/order/Order.vue";
 import Order from "../pages/my/Order.vue"
+import Cart from "../pages/cart/Cart.vue"
 // Vue.use(Router)
 
 export default [
@@ -31,6 +32,10 @@ export default [
       },{
         path: '/order',
         component: Order,
+      },
+      {
+        path: '/cart',
+        component: Cart,
       },
     ]
   },
