@@ -1,6 +1,6 @@
 <template>
   <el-main style="width:100%;height:100%;">
-    <ActivityMb />
+    <ActivityMb v-if="global.isPc === false"/>
     <ActivityMb />
     <ActivityMb />
     <ActivityMb />
@@ -9,6 +9,7 @@
 
 <script>
   import ActivityMb from '../../components/activity/ActivityMb.vue'
+  import { mapState } from 'vuex'
   export default {
     name: '',
     data(){
@@ -19,6 +20,11 @@
     },
     mounted() {
 
+    },
+    computed:{
+      ...mapState([
+        "global"
+      ])
     },
     methods:{
 

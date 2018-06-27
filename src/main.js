@@ -41,8 +41,8 @@ import MintUi from 'mint-ui';
 import App from './App'
 import routes from './router'
 import store from './store/state'
-import './style/common.css'
 import 'mint-ui/lib/style.css'
+import './style/common.css'
 
 Vue.use(Button)
 Vue.use(Container)

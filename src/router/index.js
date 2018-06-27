@@ -4,6 +4,7 @@ import Nav from '../pages/nav/Nav.vue'
 import Home from "../pages/home/Home";
 import Activity from "../pages/activity/Activity.vue";
 import GoodDetail from "../pages/good/Detail.vue";
+import Cat from '../pages/cat/Cat'
 import Temp from "../components/activity/ActivityMb.vue";
 import Order from "../pages/my/Order.vue"
 // Vue.use(Router)
@@ -32,6 +33,10 @@ export default [
         path: '/order',
         component: Order,
       },
+      {
+        path: 'cat',
+        component: Cat,
+      }
     ]
   },
   {
