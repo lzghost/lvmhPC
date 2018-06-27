@@ -7,6 +7,7 @@ import GoodDetail from "../pages/good/Detail.vue";
 import Cat from '../pages/cat/Cat'
 import Temp from "../components/activity/ActivityMb.vue";
 import Order from "../pages/my/Order.vue"
+import Cart from "../pages/cart/Cart.vue"
 // Vue.use(Router)
 
 export default [
@@ -36,7 +37,10 @@ export default [
       {
         path: 'cat',
         component: Cat,
-      }
+      },{
+        path: '/cart',
+        component: Cart,
+      },
     ]
   },
   {
