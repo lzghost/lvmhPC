@@ -24,16 +24,20 @@
         </el-col>
       </el-row>
     </el-main>
+    <div>
+      <Search />
       <el-row :gutter="0" v-if="!global.isPc">
         <el-col :span="12" v-for="good in goods" :key="good.id">
           <ProCard />
         </el-col>
       </el-row>
+    </div>
   </div>
 </template>
 
 <script>
   import ProCard from '../../components/card/ProCard.vue'
+  import { Search } from 'vux'
   import { mapState } from 'vuex'
   export default {
     name: 'Home',
@@ -43,7 +47,7 @@
       }
     },
     components:{
-      ProCard
+      ProCard, Search
     },
     mounted() {
 

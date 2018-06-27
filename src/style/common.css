@@ -54,9 +54,6 @@ body{
   padding: 0;
 }
 
-input{
-  height: 100% !important;
-}
 
 .login-wrapper input{
   background-color: transparent;
