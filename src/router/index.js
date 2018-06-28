@@ -5,7 +5,7 @@ import Home from "../pages/home/Home";
 import Activity from "../pages/activity/Activity.vue";
 import GoodDetail from "../pages/good/Detail.vue";
 import Cat from '../pages/cat/Cat'
-import Temp from "../components/activity/ActivityMb.vue";
+import Temp from "../components/card/CardMb.vue";
 import Order from "../pages/my/Order.vue"
 import Cart from "../pages/cart/Cart.vue"
 // Vue.use(Router)
@@ -45,7 +45,7 @@ export default [
   },
   {
     path: '/temp',
-    component: Activity
+    component: Temp
   }
 ]
 

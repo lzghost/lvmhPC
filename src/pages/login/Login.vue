@@ -19,7 +19,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="loginBtn">登录</el-button>
+            <el-button class="loginBtn" @click="doLogin">登录</el-button>
           </el-form-item>
         </el-form>
         <!--登录部分 end-->
@@ -40,13 +40,14 @@
           <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
         </mt-cell>
       </div>        
-      <mt-button plain type="default" size="large">登录</mt-button>
+      <mt-button plain type="default" size="large" @click="doLogin">登录</mt-button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { login } from '../../service/index'
 
 export default {
   name: "Home",
@@ -62,7 +63,19 @@ export default {
   computed: {
     ...mapState(["global"])
   },
-  methods: {}
+  methods: {
+    async doLogin(){
+      const param = {
+        account: 'yimlink.defia',
+        password: '1',
+      }
+      const res = await login(param);
+      if(res.status === 0){
+        this.$router.push('/home')
+      }
+      this.captchaCodeImg = res.code;
+    }
+  }
 };
 </script>
 
