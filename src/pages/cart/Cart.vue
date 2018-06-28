@@ -24,7 +24,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="goods"
+          label="商品信息"
           width="400">
           <template slot-scope="scope" >
             <el-row type="flex" style="padding:20px">
@@ -81,7 +81,8 @@
     name: 'Home',
     data(){
       return {
-        tableData3: [{
+        tableData3: [
+          {
           price: '300',
           name: '王小虎',
           num: '1'
