@@ -53,3 +53,45 @@ body{
 .el-main{
   padding: 0;
 }
+
+
+.login-wrapper input{
+  background-color: transparent;
+  color: white;
+}
+
+.login-wrapper .el-input-group__prepend{
+  background-color: transparent;
+  color: white;
+}
+
+.login-mb-wrapper input{
+  background-color: transparent;
+  color: white;
+}
+
+.login-mb-wrapper .el-input-group__prepend{
+  background-color: transparent;
+  color: white;
+}
+
+.login-mb-wrapper .mint-cell-title {
+  flex: 0.3 !important;
+}
+
+nput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+  /* WebKit browsers */   
+ color: rgb(253, 250, 250);   
+ }   
+ input:-moz-placeholder, textarea:-moz-placeholder {   
+ /* Mozilla Firefox 4 to 18 */   
+ color: rgb(253, 250, 250);  
+ }   
+ input::-moz-placeholder, textarea::-moz-placeholder {   
+  /* Mozilla Firefox 19+ */   
+  color: rgb(253, 250, 250);   
+ }   
+ input:-ms-input-placeholder, textarea:-ms-input-placeholder {   
+  /* Internet Explorer 10+ */   
+  color: rgb(253, 250, 250);  
+ }

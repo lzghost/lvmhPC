@@ -1,6 +1,6 @@
 <template>
-  <el-container>
-    <el-main>
+  <div>
+    <el-main v-if="global.isPc">
       <el-row>
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -24,12 +24,21 @@
         </el-col>
       </el-row>
     </el-main>
-  </el-container>
+    <div>
+      <Search />
+      <el-row :gutter="0" v-if="!global.isPc">
+        <el-col :span="12" v-for="good in goods" :key="good.id">
+          <ProCard />
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
-  import Menu from '../../components/menu/Menu.vue'
   import ProCard from '../../components/card/ProCard.vue'
+  import { Search } from 'vux'
+  import { mapState } from 'vuex'
   export default {
     name: 'Home',
     data(){
@@ -38,16 +47,17 @@
       }
     },
     components:{
-      Menu,
-      ProCard
+      ProCard, Search
     },
     mounted() {
 
     },
-    mounted(){
-
+    computed:{
+      ...mapState([
+        'global'
+      ])
     },
-    method(){
+    methods:{
 
     }
   }

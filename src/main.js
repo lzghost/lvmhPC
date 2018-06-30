@@ -36,9 +36,12 @@ import {
   Table,
   TableColumn
 } from 'element-ui'
+// 按需引入部分组件
+import MintUi from 'mint-ui';
 import App from './App'
 import routes from './router'
 import store from './store/state'
+import 'mint-ui/lib/style.css'
 import './style/common.css'
 
 Vue.use(Button)
@@ -71,6 +74,7 @@ Vue.use(TabPane)
 Vue.use(Table);
 Vue.use(TableColumn);
 
+
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
@@ -80,6 +84,7 @@ Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
+Vue.use(MintUi)
 Vue.use(VueRouter)
 console.log(routes)
 const router = new VueRouter({

@@ -39,8 +39,8 @@ export function detect() {
     || navigator.userAgent.match(/BlackBerry/i)
     || navigator.userAgent.match(/Windows Phone/i)
   ){
-    return true;
+    return false;
   }
-  return false;
+  return true;
 }
 

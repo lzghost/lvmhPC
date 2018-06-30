@@ -1,40 +1,32 @@
 <template>
-  <el-container>
-    <el-header>
-      <div class="logo"></div>
-    </el-header>
-    <el-main>
-      <el-carousel height="660px" width="1120px" :autoplay=false :interval="3000">
-        <el-carousel-item>
-          <div class="internal"></div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div class="integral"></div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div class="trail"></div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div class="trail"></div>
-        </el-carousel-item>
-      </el-carousel>
-    </el-main>
-  </el-container>
+  <el-main style="width:100%;height:100%;">
+    <ActivityMb v-if="global.isPc === false"/>
+    <ActivityMb />
+    <ActivityMb />
+    <ActivityMb />
+  </el-main>
 </template>
 
 <script>
+  import ActivityMb from '../../components/activity/ActivityMb.vue'
+  import { mapState } from 'vuex'
   export default {
     name: '',
     data(){
       return {}
     },
+    components:{
+      ActivityMb
+    },
     mounted() {
 
     },
-    mounted(){
-
+    computed:{
+      ...mapState([
+        "global"
+      ])
     },
-    method(){
+    methods:{
 
     }
   }
