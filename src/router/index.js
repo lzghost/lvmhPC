@@ -5,9 +5,12 @@ import Home from "../pages/home/Home";
 import Activity from "../pages/activity/Activity.vue";
 import GoodDetail from "../pages/good/Detail.vue";
 import Cat from '../pages/cat/Cat'
-import Temp from "../components/card/CardMb.vue";
 import Order from "../pages/my/Order.vue"
 import Cart from "../pages/cart/Cart.vue"
+
+
+import Temp from "../components/cart/CheckList.vue";
+import CartMb from "../pages/cart/CartMb.vue";
 // Vue.use(Router)
 
 export default [
@@ -40,12 +43,19 @@ export default [
       },{
         path: '/cart',
         component: Cart,
-      },
+      },{
+        path: '/cartmb',
+        component: CartMb,
+      }
     ]
   },
   {
     path: '/temp',
     component: Temp
+  },
+  {
+    path: '/test',
+    component: CartMb
   }
 ]
 

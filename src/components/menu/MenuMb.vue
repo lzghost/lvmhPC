@@ -1,5 +1,5 @@
 <template>
-    <mt-tabbar v-model="selected">
+    <mt-tabbar v-model="selected" style="z-index:999">
         <mt-tab-item id="activity">
             <img slot="icon" :src="activityIcon"> 活动
         </mt-tab-item>

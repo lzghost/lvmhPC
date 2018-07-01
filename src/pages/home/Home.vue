@@ -24,30 +24,39 @@
         </el-col>
       </el-row>
     </el-main>
-    <div>
-      <Search />
-      <el-row :gutter="0" v-if="!global.isPc">
-        <el-col :span="12" v-for="good in goods" :key="good.id">
-          <ProCard />
-        </el-col>
+    <el-main v-if="!global.isPc"> 
+      <Search
+      >
+        <img slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 10px;">
+      </Search>
+      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
+        <div v-for="good in goods" :key="good.id">
+          <el-col :span="10" :offset="1">
+            <CardMb />
+          </el-col>
+          <el-col :span="1">
+            &#12288;
+          </el-col>
+        </div>
       </el-row>
-    </div>
+    </el-main>
   </div>
 </template>
 
 <script>
   import ProCard from '../../components/card/ProCard.vue'
+  import CardMb from '../../components/card/CardMb'
   import { Search } from 'vux'
   import { mapState } from 'vuex'
   export default {
     name: 'Home',
     data(){
       return {
-          goods: [{},{},{},{},{},{},{},{},{},{}]
+        goods: [{},{},{},{},{},{},{},{},{},{}]
       }
     },
     components:{
-      ProCard, Search
+      ProCard, Search, CardMb
     },
     mounted() {
 

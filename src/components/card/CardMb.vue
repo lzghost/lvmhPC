@@ -1,6 +1,6 @@
 <template>
     <card>
-      <img slot="header" src="../../assets/fragrance-3.png" style="width:153px;height:100px;display:block;border: 1px solid rgba(230, 230, 230, 1);">
+      <img slot="header" src="../../assets/fragrance-3.png" style="width:98%;height:99%;display:block;border: 1px solid rgba(230, 230, 230, 1);">
       <div slot="content" class="card-padding">
         <el-row :gutter="0" class="pro">
             <el-col :span="24">
@@ -10,12 +10,12 @@
             </el-col>
         </el-row>
         <el-row :gutter="0" class="priceCard">
-            <el-col :span="8">
+            <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
                 <div class="priceNow">
                 ￥300
                 </div>
             </el-col>
-            <el-col :offset="1" :span="6" style="height: 100%;">
+            <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" style="height: 100%;">
                 <div class="original">
                 ¥2,100
                 </div>
