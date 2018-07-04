@@ -1,25 +1,37 @@
 <template>
-  <el-main style="width:100%;height:100%;">
-    <ActivityMb v-if="global.isPc === false"/>
-    <ActivityMb />
-    <ActivityMb />
-    <ActivityMb />
-  </el-main>
+  <div style="background-color: black;width:100%;height:100%;">
+    <el-main v-if="global.isPc === false" style="width:100%;height:100%;">
+      <ActivityMb />
+      <ActivityMb />
+      <ActivityMb />
+      <ActivityMb />
+    </el-main>
+    <el-main v-else style="width:100%;height:100%;pa">
+      <div>
+        <img src=""/>
+      </div>
+      <Activity :campList="campaignList"/>
+    </el-main>
+  </div>
 </template>
 
 <script>
-  import ActivityMb from '../../components/activity/ActivityMb.vue'
   import { mapState } from 'vuex'
+  import ActivityMb from '../../components/activity/ActivityMb.vue'
+  import Activity from '../../components/activity/Activity'
+  import { activityList } from '../../utils/api'
+
   export default {
-    name: '',
     data(){
-      return {}
+      return {
+        campaignList: [],
+      }
     },
     components:{
-      ActivityMb
+      ActivityMb, Activity
     },
     mounted() {
-
+      this.getCampaignList();
     },
     computed:{
       ...mapState([
@@ -27,7 +39,12 @@
       ])
     },
     methods:{
-
+      async getCampaignList(){
+        const res = await activityList();
+        if(res.status === 0){
+          this.campaignList = res.data;
+        }
+      }
     }
   }
 </script>

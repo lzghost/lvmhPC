@@ -9,13 +9,14 @@ Vue.use(Vuex)
 
 const state = {
   global: {
-    isPc: detect()
+    isPc: detect(),
+    campaignId: '',
   },
   cart: {
 
   },
   userInfo: {
-    
+
   }
 }
 

@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/v1': {
-        target: 'http://is.yimlinkapp.com/is-dev/', // 接口的域名
+      '/is-dev': {
+        target: 'http://is.yimlinkapp.com/', // 接口的域名
         secure: false,
         changeOrigin: true,
         pathRewrite: {
-          '^/v1': ''
+          // '^/v1': ''
         }
       }
     },
@@ -36,7 +36,7 @@ module.exports = {
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
     showEslintErrorsInOverlay: false,
-    
+
     /**
      * Source Maps
      */

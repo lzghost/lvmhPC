@@ -28,23 +28,20 @@ export default function request(url, param, method) {
     cache: 'no-cache',
     method: method,
   };
+  newOptions.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Credentials': true,
+    "If-Modified-Since":"0",
+    "Cache-Control":"no-cache",
+  };
 //   const newOptions = { ...defaultOptions};
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
-    newOptions.headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json; charset=utf-8',
-      ...newOptions.headers,
-    };
+
     console.log(newOptions.body)
     newOptions.body = JSON.stringify(param);//转成json字符串，看需要
     // newOptions.body = param;
   }else if(newOptions.method === 'GET'){
-    newOptions.headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-        ...newOptions.headers,
-      };
-    //   newOptions.body = qs.stringify(param);
     url = `${url}?${qs.stringify(param)}`
   }
   // return fetch(`${"http://10.4.3.11:9084"}${url}`, newOptions)

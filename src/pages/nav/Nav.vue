@@ -31,11 +31,12 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import Menu from '../../components/menu/Menu.vue'
   import MenuMb from '../../components/menu/MenuMb.vue'
-  import { mapState } from 'vuex'
+  import { activityList } from '../../utils/api'
+
   export default {
-    name: 'Home',
     data(){
       return {
         goods: [{},{},{},{},{},{},{},{},{},{}]
@@ -53,7 +54,9 @@
       ])
     },
     methods:{
-
+      async getMenu(){
+        const data = await activityList();
+      }
     }
   }
 </script>

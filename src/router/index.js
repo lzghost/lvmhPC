@@ -19,16 +19,16 @@ export default [
     component: Login,
   },
   {
+    path: '/campaigns',
+    component: Activity,
+  },
+  {
     path: '/',
     component: Nav,
     children:[
       {
         path: '/home',
         component: Home,
-      },
-      {
-        path: '/activity',
-        component: Activity,
       },
       {
         path: '/goodDetail',

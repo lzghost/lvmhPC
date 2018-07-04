@@ -86,12 +86,12 @@
         popOption: { boundariesElement:'body' },
       }
     },
+    props: ['menuData'],
     mounted() {
 
     },
     methods: {
-      showPerfume(event){
-        console.log(1)
+      showPerfume(){
         this.isPerfumeActive = true;
         this.isMakeUpActive = false;
         this.isSkinActive = false;

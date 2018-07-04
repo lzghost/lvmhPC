@@ -39,7 +39,7 @@
           </mt-field>
           <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
         </mt-cell>
-      </div>        
+      </div>
       <mt-button plain type="default" size="large" @click="doLogin">登录</mt-button>
     </div>
   </div>
@@ -56,24 +56,29 @@ export default {
       loginForm: {
         userName: "",
         passWord: ""
-      }
+      },
     };
   },
-  mounted() {},
+  mounted() {
+
+  },
   computed: {
     ...mapState(["global"])
   },
   methods: {
     async doLogin(){
       const param = {
-        account: 'yimlink.defia',
-        password: '1',
+        account: this.loginForm.userName, //yimlink.defia',
+        password: this.loginForm.passWord,
       }
       const res = await login(param);
       if(res.status === 0){
-        this.$router.push('/home')
+        this.$router.push('/campaigns')
+      }else if(this.global.isPc){
+
+      }else{
+
       }
-      this.captchaCodeImg = res.code;
     }
   }
 };
