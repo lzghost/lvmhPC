@@ -26,7 +26,7 @@
         <!--登录部分 end-->
       </el-col>
     </div>
-    <div class="container-mb login-mb-wrapper"  v-if="global.isPc === false">
+    <div class="container-mb login-mb-wrapper"  v-else>
       <div class="content"></div>
       <div class="logo-mb"></div>
       <div class="loginFormStyle-mb">

@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }" shadow="never">
     <router-link :to="{path: '/goodDetail', query: {}}">
-        <img src="../../assets/skincare-1.png" class="image">
+        <img :src="goodInfo.pic" class="image">
     </router-link>
     <el-row :gutter="0" class="desc">
       <el-col :span="12">
@@ -11,26 +11,26 @@
       </el-col>
       <el-col :span="12">
         <div class="stock">
-          库存：500
+          库存：{{goodInfo.stock }}
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="0" class="pro">
       <el-col :span="24">
         <div>
-          克丽丝汀迪奥真我情柔淡香氛 100ml
+          {{ goodInfo.name }}
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="0" class="priceCard">
       <el-col :span="5">
         <div class="priceNow">
-          ￥300
+          ￥{{ goodInfo.price }}
         </div>
       </el-col>
       <el-col :offset="1" :span="6" style="height: 100%;">
         <div class="original">
-          ¥2,100
+          ¥{{ goodInfo.originPrice }}
         </div>
       </el-col>
       <el-col :span="12">
@@ -52,6 +52,7 @@
           isShow: false,
       }
     },
+    props:['goodInfo'],
     components:{
       PopCart
     },

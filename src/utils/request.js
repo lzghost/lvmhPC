@@ -22,7 +22,7 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, param, method) {
+export default function request(url, method, param) {
   const newOptions = {
     credentials: 'include',
     cache: 'no-cache',
@@ -35,6 +35,7 @@ export default function request(url, param, method) {
     "If-Modified-Since":"0",
     "Cache-Control":"no-cache",
   };
+  param = param ? param : '';
 //   const newOptions = { ...defaultOptions};
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
 

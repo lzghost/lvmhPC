@@ -10,10 +10,10 @@ Vue.use(Vuex)
 const state = {
   global: {
     isPc: detect(),
-    campaign: {},
-    categories: {},
-    userInfo: {},
+    bread: ['内购', '全部产品'],
   },
+  campaign: {},
+  categories: {},
   cart: {
 
   },

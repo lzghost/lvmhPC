@@ -1,17 +1,9 @@
 <template>
   <div>
-    <el-main v-if="global.isPc">
-      <el-row>
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
-      </el-row>
+    <div v-if="global.isPc">
       <el-row :gutter="20">
         <el-col :span="6" v-for="good in goods" :key="good.id">
-          <ProCard />
+          <ProCard :goodInfo="good"/>
         </el-col>
       </el-row>
       <el-row>
@@ -23,8 +15,8 @@
           </el-pagination>
         </el-col>
       </el-row>
-    </el-main>
-    <el-main v-if="!global.isPc"> 
+    </div>
+    <div v-else>
       <Search
       >
         <img slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 10px;">
@@ -39,7 +31,7 @@
           </el-col>
         </div>
       </el-row>
-    </el-main>
+    </div>
   </div>
 </template>
 
@@ -48,26 +40,31 @@
   import CardMb from '../../components/card/CardMb'
   import { Search } from 'vux'
   import { mapState } from 'vuex'
+  import { categorieInfo } from '../../service/index'
   export default {
     name: 'Home',
     data(){
       return {
-        goods: [{},{},{},{},{},{},{},{},{},{}]
+        goods: []
       }
     },
     components:{
       ProCard, Search, CardMb
     },
     mounted() {
-
+      this.getGoodsByType();
     },
     computed:{
       ...mapState([
-        'global'
+        'global','categories'
       ])
     },
     methods:{
-
+      async getGoodsByType(){
+        console.log(this.categories)
+        const allGoods = await categorieInfo(this.categories[0].id)
+        this.goods = allGoods.data;
+      }
     }
   }
 </script>

@@ -44,6 +44,15 @@ export function detect() {
   return true;
 }
 
-export function pushChildren(){
-
+export function pushChildren(parent, children){
+  children.map((child) => {
+    parent.map((parent) => {
+      if(!parent.children) {
+        parent.children = [];
+      }
+      if(child.productTypeId === parent.id){
+        parent.children.push(child)
+      }
+    })
+  })
 }
