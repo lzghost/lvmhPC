@@ -9,6 +9,7 @@
           <el-form-item prop="userName">
             <el-input class="input-login"
                       v-model="loginForm.userName"
+                      clearable
                       auto-complete="off">
               <img slot="prepend" src="../../assets/icon/user.png" style="background-color: transparent">
             </el-input>

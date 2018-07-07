@@ -2,6 +2,8 @@
  * Created by lizheng on 2018/6/6.
  */
 import {
+  INIT_CAMPAIGN,
+  INIT_MENU,
   RECORD_ADDRESS,
   ADD_CART,
   REDUCE_CART,
@@ -37,6 +39,12 @@ import {setStore, getStore} from '../utils/storage'
 
 
 export default {
+  [INIT_CAMPAIGN](state,campaign){
+    state.campaign = { ...state.campaign, ...campaign}
+  },
+  [INIT_MENU](state,categories){
+    state.categories = { ...state.categories, ...categories}
+  },
   // 记录当前经度纬度
   [RECORD_ADDRESS](state, {
                      latitude,

@@ -34,28 +34,43 @@
   import { mapState } from 'vuex'
   import Menu from '../../components/menu/Menu.vue'
   import MenuMb from '../../components/menu/MenuMb.vue'
-  import { activityList } from '../../utils/api'
+  import { campaignMenu, campaignInfo } from '../../service'
 
   export default {
     data(){
       return {
-        goods: [{},{},{},{},{},{},{},{},{},{}]
       }
     },
     components:{
       Menu,MenuMb
     },
     mounted() {
-
+      this.getMenu();
     },
     computed:{
       ...mapState([
-        'global'
+        'global', 'campaign'
       ])
     },
     methods:{
+      ...mapMutations({
+        saveCampaignInfo: 'INIT_CAMPAIGN'
+      }),
       async getMenu(){
-        const data = await activityList();
+        const campaignInfo = await campaignInfo(this.campaign.id);
+        if(campaignInfo.data){
+          const dateTime = new Date().getTime()
+          if(dateTime > campaignInfo.data.end){
+            this.$router.push() //活动过期
+          }else if(dateTime < campaignInfo.data.begin){
+            this.$router.push() //活动未开始
+          }else{
+            this.saveCampaignInfo(campaignInfo.data)
+            const menu = await campaignMenu(this.campaign.id);
+
+          }
+        }
+
       }
     }
   }

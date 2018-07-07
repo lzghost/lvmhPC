@@ -27,7 +27,7 @@ export default [
     component: Nav,
     children:[
       {
-        path: '/home',
+        path: '/home/:id',
         component: Home,
       },
       {
