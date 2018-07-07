@@ -5,13 +5,6 @@
         <Menu :menuData="navMenu"/>
       </el-header>
       <el-main>
-        <el-row style="margin-top: 40px;margin-bottom: 26px;">
-          <el-col :offset="1">
-            <el-breadcrumb separator="/">
-              <el-breadcrumb-item v-for="(des,index) in global.bread" :key="index">{{ des }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </el-col>
-        </el-row>
         <transition name="router-fade" mode="out-in">
           <keep-alive>
             <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -43,7 +36,7 @@
   import {mapState, mapMutations} from 'vuex'
   import Menu from '../../components/menu/Menu.vue'
   import MenuMb from '../../components/menu/MenuMb.vue'
-  import {campaignMenu, campaignInfo} from '../../service/index'
+  import {campaignMenu, campaignInfo, categorieInfo} from '../../service/index'
   import {pushChildren} from '../../utils/storage'
 
   export default {
@@ -55,7 +48,7 @@
     components: {
       Menu, MenuMb
     },
-    mounted() {
+    created() {
       this.getMenu();
     },
     computed: {
@@ -67,9 +60,11 @@
       ...mapMutations({
         saveCampaignInfo: 'INIT_CAMPAIGN',
         initMenu: 'INIT_MENU',
+        initGoods: 'INIT_GOODS',
       }),
       async getMenu() {
-        const responseCampaign = await campaignInfo(this.campaign.id);
+        const camId = this.campaign.id || this.$route.params.id
+        const responseCampaign = await campaignInfo(camId);
         if (responseCampaign.data) {
           const dateTime = new Date().getTime()
           // if(dateTime > responseCampaign.data.end){
@@ -82,14 +77,20 @@
           //
           // }
           this.saveCampaignInfo(responseCampaign.data)
-          const menu = await campaignMenu(this.campaign.id);
+          const menu = await campaignMenu(camId);
           const parent = menu.data.types;
           const children = menu.data.cats;
           pushChildren(parent, children)
           this.navMenu = parent;
-          this.initMenu(parent)
+          this.initMenu(parent);
+          this.getGoodsByType(parent);
         }
 
+      },
+      async getGoodsByType(parent){
+        console.log(parent)
+        const allGoods = await categorieInfo(parent[0].id)
+        this.initGoods(allGoods.data)
       }
     }
   }

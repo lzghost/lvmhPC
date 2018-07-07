@@ -4,6 +4,7 @@
 //定义dispatch的action名字，相当于redux中的reducer中的执行
 export const INIT_CAMPAIGN = 'INIT_CAMPAIGN' //初始化活动
 export const INIT_MENU = 'INIT_MENU' //菜单数据
+export const INIT_GOODS = 'INIT_GOODS'
 export const RECORD_ADDRESS = 'RECORD_ADDRESS'
 export const ADD_CART = 'ADD_CART'
 export const REDUCE_CART = 'REDUCE_CART'

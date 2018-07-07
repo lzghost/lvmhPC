@@ -4,6 +4,7 @@
 import {
   INIT_CAMPAIGN,
   INIT_MENU,
+  INIT_GOODS,
   RECORD_ADDRESS,
   ADD_CART,
   REDUCE_CART,
@@ -44,6 +45,9 @@ export default {
   },
   [INIT_MENU](state,categories){
     state.categories = { ...state.categories, ...categories}
+  },
+  [INIT_GOODS](state, goods){
+    state.goods = goods;
   },
   // 记录当前经度纬度
   [RECORD_ADDRESS](state, {

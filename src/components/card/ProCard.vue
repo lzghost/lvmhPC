@@ -4,16 +4,16 @@
         <img :src="goodInfo.pic" class="image">
     </router-link>
     <el-row :gutter="0" class="desc">
-      <el-col :span="12">
-        <div class="code">
-          F084055009
-        </div>
-      </el-col>
-      <el-col :span="12">
-        <div class="stock">
-          库存：{{goodInfo.stock }}
-        </div>
-      </el-col>
+      <!--<el-col :span="12">-->
+        <!--<div class="code">-->
+          <!--F084055009-->
+        <!--</div>-->
+      <!--</el-col>-->
+      <!--<el-col :span="12">-->
+        <!--<div class="stock">-->
+          <!--库存：{{goodInfo.stock }}-->
+        <!--</div>-->
+      <!--</el-col>-->
     </el-row>
     <el-row :gutter="0" class="pro">
       <el-col :span="24">
@@ -76,8 +76,8 @@
     padding: 0;
   }
   .image {
-    width: 216px;
-    height: 140px;
+    width: 213px;
+    height: 213px;
     border: 1px solid rgba(230, 230, 230, 1);
 
   }
@@ -97,7 +97,7 @@
     margin-top: 4px;
     color: #333333;
     font-size: 12px;
-    font-family: PingFangSC-Regular;
+    min-height: 34px;
   }
   .priceCard{
     margin-top: 7px;
@@ -116,6 +116,5 @@
     text-align: left;
     height: 100%;
     text-decoration:line-through;
-    font-family: PingFangSC-Regular;
   }
 </style>

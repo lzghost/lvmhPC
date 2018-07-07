@@ -14,6 +14,9 @@ const state = {
   },
   campaign: {},
   categories: {},
+  goods: {
+
+  },
   cart: {
 
   },
