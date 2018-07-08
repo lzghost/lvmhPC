@@ -24,6 +24,18 @@ export function campaignMenu(campaignId){
   return request(Api.categories(campaignId), 'GET')
 }
 
+export function campaignGoods(campaignId){
+  return request(Api.campaignGoods(campaignId))
+}
+
 export function categorieInfo(typeId){
   return request(Api.typeGoods(typeId), 'GET')
+}
+
+export function goodDetail(goodId){
+  return request(Api.goodDetail(goodId), 'GET')
+}
+
+export function goodProduct(goodId){
+  return request(Api.goodProduct(goodId))
 }

@@ -36,7 +36,7 @@
   import {mapState, mapMutations} from 'vuex'
   import Menu from '../../components/menu/Menu.vue'
   import MenuMb from '../../components/menu/MenuMb.vue'
-  import {campaignMenu, campaignInfo, categorieInfo} from '../../service/index'
+  import {campaignMenu, campaignInfo, categorieInfo, campaignGoods} from '../../service/index'
   import {pushChildren} from '../../utils/storage'
 
   export default {
@@ -83,13 +83,12 @@
           pushChildren(parent, children)
           this.navMenu = parent;
           this.initMenu(parent);
-          this.getGoodsByType(parent);
+          this.getGoodsByType(camId);
         }
 
       },
-      async getGoodsByType(parent){
-        console.log(parent)
-        const allGoods = await categorieInfo(parent[0].id)
+      async getGoodsByType(camId){
+        const allGoods = await campaignGoods(camId)
         this.initGoods(allGoods.data)
       }
     }

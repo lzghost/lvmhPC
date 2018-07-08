@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="isShow" width="500px" top="15vh">
+  <el-dialog :visible="isShow" width="500px" top="15vh" @close="closePop">
     <div slot="title" class="title">
       <el-row :gutter="0">
         <el-col :span="5">
@@ -81,11 +81,8 @@
         count: 1,
       }
     },
-    props: ['isShow', 'headTitle', 'goBack'],
+    props: ['isShow', 'closePop'],
     mounted() {
-
-    },
-    mounted(){
 
     },
     methods: {

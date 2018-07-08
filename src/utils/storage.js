@@ -56,3 +56,16 @@ export function pushChildren(parent, children){
     })
   })
 }
+
+export function productCombine(data = []){
+  const norm = {};
+  data.map(item => {
+    if(item.spec1){
+      if(!norm.spec){
+        norm.spec = []
+      }
+      norm.spec.push(norm.spec2)
+    }
+  })
+  return norm;
+}

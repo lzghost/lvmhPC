@@ -7,6 +7,7 @@ const Api = {
   campaignInfo: campaignId => `${hostStore}campaign/${campaignId}/info`,//活动详细信息
   userInfo: campaignId => `${hostStore}campaign/${campaignId}/userinfo`,//用户详细信息
   categories: campaignId => `${hostStore}campaign/${campaignId}/categories`,//活动下分类信息
+  campaignGoods: campaignId => `${hostStore}campaign/${campaignId}/goods`,//活动所有物品信息
   typeGoods: (typeId) => `${hostStore}type/${typeId}/goods`,//类型下所有商品
   catGoods: campaignId => `${hostStore}${campaignId}/goods`,//类型下所有商品
   goodDetail: goodId => `${hostStore}good/${goodId}`, //商品信息

@@ -26,7 +26,7 @@ export default function request(url, method, param) {
   const newOptions = {
     credentials: 'include',
     cache: 'no-cache',
-    method: method,
+    method: method ? method : 'GET',
   };
   newOptions.headers = {
     Accept: 'application/json',

@@ -10,7 +10,7 @@
       </el-row>
       <el-row>
         <el-col :span="6" v-for="good in showGoods" :key="good.id">
-          <ProCard :goodInfo="good"/>
+          <ProCard :goodInfo="good" :changeVisible="changeVisible" :closePop="closePop"/>
         </el-col>
       </el-row>
       <el-row>
@@ -26,6 +26,7 @@
           </el-pagination>
         </el-col>
       </el-row>
+      <PopCart :isShow="isShow" :goodInfo="productDetail" :closePop="closePop" :spec="spec"/>
     </div>
     <div v-else>
       <Search
@@ -47,26 +48,26 @@
 </template>
 
 <script>
-  import ProCard from '../../components/card/ProCard.vue'
-  import CardMb from '../../components/card/CardMb'
   import { Search } from 'vux'
   import { mapState } from 'vuex'
-  import { categorieInfo } from '../../service/index'
+  import ProCard from '../../components/card/ProCard.vue'
+  import CardMb from '../../components/card/CardMb'
+  import PopCart from '../../components/cart/PopCart.vue'
+  import { goodProduct } from '../../service/index'
+  import { productCombine } from '../../utils/storage'
   export default {
     name: 'Home',
     data(){
       return {
         currentPage: 1,
         pageSize: 8,
-        // showGoods: [],
+        isShow: false,
+        productDetail: {},
+        spec: {},
       }
     },
     components:{
-      ProCard, Search, CardMb
-    },
-    mounted() {
-      // this.getGoodsByType();
-      // this.showGoods = this.goods.slice(this.currentPage * this.pageSize - 1,(this.currentPage+1) * this.pageSize -1);
+      ProCard, Search, CardMb, PopCart
     },
     computed:{
       ...mapState([
@@ -75,9 +76,14 @@
       total(){
         return this.goods.length
       },
-      showGoods(){
-        return this.goods.slice && this.goods.slice((this.currentPage-1) * this.pageSize,this.currentPage * this.pageSize);
-      }
+      showGoods: {
+        get(){
+          return this.goods.slice && this.goods.slice((this.currentPage-1) * this.pageSize,this.currentPage * this.pageSize);
+        },
+        set() {
+
+        }
+      },
     },
     watch:{
       currentPage: function(val, oldVal){
@@ -85,13 +91,16 @@
       }
     },
     methods:{
-      async getGoodsByType(){
-        console.log(this.categories)
-        const allGoods = await categorieInfo(this.categories[0].id)
-        this.goods = allGoods.data;
-      },
       changeCurrentPage(val){
         this.currentPage = val
+      },
+      async changeVisible(id){
+        const goodDetail = await goodProduct(id);
+        this.spec = productCombine(goodDetail.data);
+        this.isShow = true
+      },
+      closePop(){
+        this.isShow = false
       }
     }
   }
