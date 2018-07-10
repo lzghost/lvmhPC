@@ -35,7 +35,7 @@
       </el-col>
       <el-col :span="12">
         <div style="text-align: right">
-          <el-button type="text"><img src="../../assets/icon/cart.png" alt="" @click="changeVisible(goodInfo.id)"></el-button>
+          <el-button type="text"><img src="../../assets/icon/cart.png" alt="" @click="changeVisible(goodInfo)"></el-button>
         </div>
       </el-col>
     </el-row>

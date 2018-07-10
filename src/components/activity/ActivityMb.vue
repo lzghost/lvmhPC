@@ -1,9 +1,9 @@
 <template>
   <el-row class="activity">
-    <el-col class="content" v-bind:style="{backgroundImage: 'url(' + test + ')'}">
+    <el-col class="content" v-bind:style="{backgroundImage: 'url(' + camp.pic + ')'}">
         <el-row style="height:100%;">
             <el-col :span="5" :offset="19" class="next">
-                <div class="display" style="height:100%;width:100%;" @click="openPop">Next
+                <div class="display" style="height:100%;width:100%;" >Next
                     <div>--></div>
                 </div>
             </el-col>
@@ -20,15 +20,7 @@
         test: require('../../assets/activity-mb-one.png')
       }
     },
-    // props:['url'],
-    mounted() {
-
-    },
-    methods: {
-      openPop(){
-          console.log(1);
-      }
-    }
+    props:['camp'],
   }
 </script>
 

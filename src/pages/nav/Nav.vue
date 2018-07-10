@@ -27,7 +27,7 @@
       <transition name="router-fade" mode="out-in">
         <router-view v-if="!$route.meta.keepAlive"></router-view>
       </transition>
-      <MenuMb/>
+      <MenuMb :menuData="navMenu"/>
     </div>
   </div>
 </template>
@@ -36,7 +36,7 @@
   import {mapState, mapMutations} from 'vuex'
   import Menu from '../../components/menu/Menu.vue'
   import MenuMb from '../../components/menu/MenuMb.vue'
-  import {campaignMenu, campaignInfo, categorieInfo, campaignGoods} from '../../service/index'
+  import {campaignMenu, campaignInfo, campaignGoods, getCartNum} from '../../service/index'
   import {pushChildren} from '../../utils/storage'
 
   export default {
@@ -49,6 +49,7 @@
       Menu, MenuMb
     },
     created() {
+      this.initFromStore();
       this.getMenu();
     },
     computed: {
@@ -60,7 +61,9 @@
       ...mapMutations({
         saveCampaignInfo: 'INIT_CAMPAIGN',
         initMenu: 'INIT_MENU',
-        initGoods: 'INIT_GOODS',
+        initFromStore: 'INIT_CAMPAIGN_STORE',
+        initCartNum: 'INIT_CART_NUM',
+        initGoods: 'INIT_GOODS'
       }),
       async getMenu() {
         const camId = this.campaign.id || this.$route.params.id
@@ -83,14 +86,15 @@
           pushChildren(parent, children)
           this.navMenu = parent;
           this.initMenu(parent);
-          this.getGoodsByType(camId);
+          const cartNum = await getCartNum(camId)
+          this.initCartNum({ cartNum: cartNum.data })
+          this.getAllGoods(camId);
         }
-
       },
-      async getGoodsByType(camId){
-        const allGoods = await campaignGoods(camId)
+      async getAllGoods(){
+        const allGoods = await campaignGoods(this.campaign.id)
         this.initGoods(allGoods.data)
-      }
+      },
     }
   }
 </script>

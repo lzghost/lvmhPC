@@ -1,9 +1,9 @@
 <template>
     <mt-tabbar v-model="selected" style="z-index:999">
-        <mt-tab-item id="activity">
+        <mt-tab-item id="activity" @click.native="goToHome">
             <img slot="icon" :src="activityIcon"> 活动
         </mt-tab-item>
-        <mt-tab-item id="cat">
+        <mt-tab-item id="cat" @click.native="goToMenu">
             <img slot="icon" :src="catIcon"> 分类
         </mt-tab-item>
         <mt-tab-item id="cart">
@@ -34,7 +34,14 @@ export default {
   computed: {
 
   },
-  methods: {},
+  methods: {
+    goToMenu() {
+      this.$router.push('/cat')
+    },
+    goToHome() {
+      this.$router.push('/home')
+    }
+  },
   watch: {
       selected: function(newSelected, oldSelected){
           switch(newSelected){

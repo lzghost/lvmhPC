@@ -31,12 +31,12 @@
       <div class="logo-mb"></div>
       <div class="loginFormStyle-mb">
         <mt-cell>
-          <mt-field label="" placeholder="请输入用户名" >
+          <mt-field label="" v-model="loginForm.userName" placeholder="请输入用户名" >
           </mt-field>
           <img slot="icon" src="../../assets/mobile/user.png" width="21" height="24">
         </mt-cell>
         <mt-cell>
-          <mt-field label="" placeholder="请输入密码" >
+          <mt-field label="" v-model="loginForm.passWord" placeholder="请输入密码" >
           </mt-field>
           <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
         </mt-cell>

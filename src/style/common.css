@@ -138,3 +138,24 @@ nput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   font-size: 20px;
   color: #D7B25A !important;
 }
+
+.el-badge__content {
+  background-color: #D7B25A;
+  border-radius: 90px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  height: 15px;
+  line-height: 15px;
+  padding: 0 2px;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+}
+
+.mint-indexlist-content{
+  margin-right: 0 !important;
+}
+.mint-indexlist-nav{
+  display: none;
+}

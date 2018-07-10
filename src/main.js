@@ -34,7 +34,8 @@ import {
   Tabs,
   TabPane,
   Table,
-  TableColumn
+  TableColumn,
+  Badge
 } from 'element-ui'
 // 按需引入部分组件
 import MintUi from 'mint-ui';
@@ -72,7 +73,8 @@ Vue.use(Pagination)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Table);
-Vue.use(TableColumn);
+Vue.use(TableColumn)
+Vue.use(Badge)
 
 
 Vue.prototype.$loading = Loading.service

@@ -28,6 +28,14 @@ export function campaignGoods(campaignId){
   return request(Api.campaignGoods(campaignId))
 }
 
+export function getGoodsByType(typeId){
+  return request(Api.typeGoods(typeId))
+}
+
+export function getGoodsByCat(catId){
+  return request(Api.catGoods(catId))
+}
+
 export function categorieInfo(typeId){
   return request(Api.typeGoods(typeId), 'GET')
 }
@@ -38,4 +46,16 @@ export function goodDetail(goodId){
 
 export function goodProduct(goodId){
   return request(Api.goodProduct(goodId))
+}
+
+export function getProductPic(goodId){
+  return request(Api.goodPic(goodId))
+}
+
+export function addCart(campaignId, param){
+  return request(Api.addCartProduct(campaignId), 'POST', param)
+}
+
+export function getCartNum(campaignId){
+  return request(Api.cartNum(campaignId))
 }

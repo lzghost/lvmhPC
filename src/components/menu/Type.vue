@@ -7,15 +7,22 @@
       popper-class="popMenu"
       :visible-arrow=false
     >
-      <el-row :gutter="0">
-        <el-col :xs="4" :sm="4" :md="4" :lg="2" :xl="2" v-for="item in menu.children" :key="item.id">{{ item.name }}</el-col>
+      <el-row :gutter="0" class="cat">
+        <span v-for="item in menu.children" :key="item.id">
+          <router-link :to="{path: '/home', query:{type: menu.id, cat: item.id}}">
+            <el-button type="text">{{ item.name }}</el-button>
+          </router-link>
+        </span>
       </el-row>
-      <el-button slot="reference" type="text">{{ menu.name }}</el-button>
+        <el-button slot="reference" type="text">
+          <router-link :to="{path: '/home', query:{type: menu.id}}"><span class="cat">{{ menu.name }}</span></router-link>
+        </el-button>
     </el-popover>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   export default {
     name: '',
     data() {
@@ -27,22 +34,32 @@
       this.popoverRef = this.menu.id;
     },
     props: ['menu'],
-    watch: {
-    },
     methods: {
-      changeVisible(){
-      }
+      ...mapMutations({
+        changeBread: 'CHANGE_BREAD',
+      }),
+      changeBreadCrumb(menuName, childrenName){
+        if(childrenName){
+          this.changeBreadCrumb([menuName, childrenName])
+        }else{
+          this.changeBreadCrumb([menuName])
+        }
+      },
     }
   }
 </script>
 
 <style scoped>
-  .el-row {
+  .cat {
     background-color: #333333;
     height: 100%;
     color: white;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
+  }
+
+  .cat span{
+    margin: 0 10px;
   }
 
   .el-col {
@@ -58,15 +75,18 @@
   .el-button{
     color: white;
   }
+
+  .el-button span{
+    background-color: #333333;
+    height: 100%;
+    color: white;
+    text-align: left;
+    vertical-align: middle;
+  }
   .el-button:focus, .el-button:hover{
     color: rgba(215, 178, 90, 1);
     border-bottom: 2px solid rgba(215, 178, 90, 1);
     border-radius: 0;
-  }
-
-  .activePerfume {
-    color: yellow;
-    border-bottom: 2px yellow solid;
   }
 
 </style>

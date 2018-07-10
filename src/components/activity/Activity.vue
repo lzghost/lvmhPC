@@ -1,5 +1,5 @@
 <template>
-  <el-row class="activity" @click="openPop">
+  <el-row class="activity">
     <el-col class="content" v-bind:style="{backgroundImage: 'url(' + camp.pic + ')'}">
       <el-row style="height:100%;">
         <el-col :span="3" :offset="20" class="next">
@@ -22,12 +22,6 @@
     mounted() {
 
     },
-    methods: {
-      openPop(){
-        console.log(this.camp)
-        this.$router.push(`/home/${this.camp.id}`)
-      }
-    }
   }
 </script>
 

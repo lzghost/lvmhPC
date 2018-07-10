@@ -5,25 +5,25 @@
         <el-col :span="5">
           <el-row :gutter="0">
             <el-col>
-              <img src="../../assets/popcart.png" class="image"/>
+              <img :src="popPic" class="image"/>
             </el-col>
           </el-row>
         </el-col>
         <el-col :span="18" :offset="1">
           <el-row :gutter="0">
             <el-col>
-              <div class="name">克丽丝汀迪奥真我情柔淡香氛 100ml</div>
+              <div class="name">{{ goodInfo.name }}</div>
             </el-col>
           </el-row>
           <el-row :gutter="0">
             <el-col>
-              <div class="price"> ¥300</div>
+              <div class="price"> ¥{{ goodInfo.price }}</div>
             </el-col>
           </el-row>
         </el-col>
       </el-row>
     </div>
-    <div class="body">
+    <div class="body" v-if="Object.keys(spec).length > 0">
       <div>规格</div>
       <el-row :gutter="20" style="margin-top: 5px;">
         <el-col :span="5">
@@ -56,14 +56,14 @@
     <el-row :gutter="20" style="margin-top: 20px;height: 28px;">
       <el-col :span="4" style="text-align: left;height: 28px;line-height: 28px;">数量</el-col>
       <el-col :span="12" style="text-align: right;font-size: 12px;color:#999999;height: 28px;line-height: 28px;">
-        库存:5000
+        库存:{{ goodInfo.stock }}
       </el-col>
       <el-col :span="7">
         <el-input-number size="mini" v-model="count"></el-input-number>
       </el-col>
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text">
+      <el-button type="text" @click="addToCart(goodInfo.id, $event)">
         <div class="add">
           <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购入车
         </div>
@@ -74,19 +74,49 @@
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex'
+  import { addCart } from '../../service/index'
   export default {
     name: '',
     data(){
       return {
         count: 1,
+        showMoveDot: [],
       }
     },
-    props: ['isShow', 'closePop'],
+    props: ['isShow', 'closePop', 'spec', 'productPic', 'goodInfo', 'products'],
     mounted() {
 
     },
+    computed: {
+      ...mapState([
+        'cart','campaign'
+      ]),
+      popPic(){
+        if(this.productPic && this.productPic[0]){
+          return this.productPic[0].url160
+        }
+      }
+    },
     methods: {
-
+      async addToCart(goodId, event){
+        const param = {
+          "items": [
+            {
+              "productId": goodId,
+              "qty": this.count
+            }
+          ]
+        }
+        const result = await addCart(this.campaign.id, param);
+        if(result.status === 0){
+          let elLeft = event.target.getBoundingClientRect().left;
+          let elBottom = event.target.getBoundingClientRect().bottom;
+          this.showMoveDot.push(true);
+          this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);
+          this.closePop();
+        }
+      }
     }
   }
 </script>

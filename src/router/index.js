@@ -21,13 +21,26 @@ export default [
   {
     path: '/campaigns',
     component: Activity,
+    meta: {
+      keepAlive: true,
+    },
   },
   {
     path: '/',
     component: Nav,
+    meta: {
+      keepAlive: true,
+    },
     children:[
       {
-        path: '/home/:id',
+        path: '/home',
+        component: Home,
+        meta: {
+          keepAlive: true,
+        },
+      },
+      {
+        path: '/homeFilter',
         component: Home,
       },
       {

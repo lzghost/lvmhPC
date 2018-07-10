@@ -1,10 +1,7 @@
 <template>
   <div style="background-color: black;width:100%;height:100%;">
     <el-main v-if="global.isPc === false" style="width:100%;height:100%;">
-      <ActivityMb />
-      <ActivityMb />
-      <ActivityMb />
-      <ActivityMb />
+      <ActivityMb v-for="cap in campaignList" :key="cap.id" :camp="cap" @click.native="openPop(cap.id)"/>
     </el-main>
     <el-main v-else style="width:100%;height:100%;padding-top: 33px;">
       <el-row>
@@ -60,7 +57,7 @@
       openPop(id){
         console.log(id)
         this.chooseCampaign({id})
-        this.$router.push(`/home/${id}`)
+        this.$router.push('/home')
       }
     }
   }
