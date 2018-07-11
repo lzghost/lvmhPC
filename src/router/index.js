@@ -26,6 +26,11 @@ export default [
     },
   },
   {
+    path: '/cat',
+    name: 'cat',
+    component: Cat,
+  },
+  {
     path: '/',
     component: Nav,
     meta: {
@@ -33,31 +38,28 @@ export default [
     },
     children:[
       {
-        path: '/home',
+        path: 'home',
+        name: 'home',
         component: Home,
         meta: {
           keepAlive: true,
         },
       },
       {
-        path: '/homeFilter',
+        path: 'homeFilter',
         component: Home,
       },
       {
-        path: '/goodDetail',
+        path: 'goodDetail',
         component: GoodDetail,
       },{
-        path: '/order',
+        path: 'order',
         component: Order,
-      },
-      {
-        path: 'cat',
-        component: Cat,
       },{
-        path: '/cart',
+        path: 'cart',
         component: Cart,
       },{
-        path: '/cartmb',
+        path: 'cartmb',
         component: CartMb,
       }
     ]

@@ -159,3 +159,7 @@ nput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 .mint-indexlist-nav{
   display: none;
 }
+
+.weui-search-bar{
+  padding: 8px 8px !important;
+}

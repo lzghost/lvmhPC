@@ -6,10 +6,10 @@
         <mt-tab-item id="cat" @click.native="goToMenu">
             <img slot="icon" :src="catIcon"> 分类
         </mt-tab-item>
-        <mt-tab-item id="cart">
+        <mt-tab-item id="cart" @click.native="goToCart">
             <img slot="icon" :src="cartIcon"> 购物车
         </mt-tab-item>
-        <mt-tab-item id="my">
+        <mt-tab-item id="my" @click.native="goToMy">
             <img slot="icon" :src="myIcon"> 我的
         </mt-tab-item>
     </mt-tabbar>
@@ -40,6 +40,12 @@ export default {
     },
     goToHome() {
       this.$router.push('/home')
+    },
+    goToCart() {
+      this.$router.push('/cart')
+    },
+    goToMy() {
+      this.$router.push('/order')
     }
   },
   watch: {

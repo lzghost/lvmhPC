@@ -50,10 +50,10 @@
     <div v-else>
       <Search
       >
-        <img slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 10px;">
+        <img @click="goToMenuMb" slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 6px;">
       </Search>
       <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
-        <div v-for="good in goods" :key="good.id">
+        <div v-for="good in showAllGoods" :key="good.id">
           <el-col :span="10" :offset="1">
             <CardMb :goodInfo="good"/>
           </el-col>
@@ -179,6 +179,11 @@
       closePop(){
         this.isShow = false
       },
+      goToMenuMb(){
+        this.$router.push({
+          name: 'cat',
+        })
+      }
     },
   }
 </script>
