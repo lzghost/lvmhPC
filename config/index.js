@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/is-dev': {
+        target: 'http://is.yimlinkapp.com/', // 接口的域名
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          // '^/v1': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

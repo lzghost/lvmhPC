@@ -10,7 +10,7 @@
     </el-row>
     <el-row>
       <el-col :span="8" :offset="8">
-        <div class="">
+        <div class="given-chy">
           GIVENCHY
         </div>
       </el-col>
@@ -19,13 +19,41 @@
       <el-col :span="18" :offset="3">
         <el-tabs type="border-card" :stretch="true">
           <el-tab-pane label="全部订单">
-            <Order />
+            <Order
+              v-for="order in orderList"
+              :key="order.id"
+              :orderId="order.id"
+              :tableData="order.items"
+              :orderDate="order.orderDate"
+              :status="order.status"
+              :amount="order.amount"
+              :totalQty="order.amount"
+              :orderNo="order.orderNo"
+            ></Order>
           </el-tab-pane>
           <el-tab-pane label="未付款">
-
+            <Order
+              v-for="order in getNoPaiedOrder"
+              :key="order.id"
+              :tableData="order.items"
+              :orderDate="order.orderDate"
+              :status="order.status"
+              :amount="order.amount"
+              :totalQty="order.amount"
+              :orderNo="order.orderNo"
+            ></Order>
           </el-tab-pane>
           <el-tab-pane label="已付款">
-
+            <Order
+              v-for="order in getPaiedOrder"
+              :key="order.id"
+              :tableData="order.items"
+              :orderDate="order.orderDate"
+              :status="order.status"
+              :amount="order.amount"
+              :totalQty="order.amount"
+              :orderNo="order.orderNo"
+            ></Order>
           </el-tab-pane>
         </el-tabs>
       </el-col>
@@ -34,24 +62,39 @@
 </template>
 
 <script>
-  import Order from '../../components/order/Order.vue'
+  import { mapState, mapMutations } from 'vuex'
+  import { orderList } from '@/service/index'
+
+  import Order from '@/components/order/Order.vue'
+
   export default {
     name: 'Home',
-    data(){
+    data () {
       return {
+        orderList: []
       }
     },
     components: {
       Order
     },
-    mounted() {
-
+    mounted () {
+      this.getOrderList()
     },
-    mounted(){
-
+    computed: {
+      getNoPaiedOrder () {
+        return this.orderList.filter(order => order.status === 2)
+      },
+      getPaiedOrder () {
+        return this.orderList.filter(order => order.status === 11)
+      }
     },
-    method(){
-
+    methods: {
+      async getOrderList () {
+        const res = await orderList()
+        if (res.status === 0) {
+          this.orderList = res.data
+        }
+      }
     }
   }
 </script>
@@ -61,7 +104,7 @@
     height: 213px;
     border-radius: 2px;
     background-color: rgba(64, 64, 64, 1);
-    box-shadow: 0px 2px 4px 0px rgba(215, 215, 215, 1);
+    box-shadow: 0 2px 4px 0 rgba(215, 215, 215, 1);
   }
 
   .name {
@@ -70,5 +113,18 @@
     color: rgba(255, 255, 255, 1);
     font-size: 32px;
     text-align: center;
+  }
+
+  .given-chy {
+    height: 14px;
+    padding: 10px 0 50px;
+    letter-spacing: .3em;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .el-tabs__item {
+    height: 60px;
+    background-color: rgba(255, 255, 255, 1);
   }
 </style>

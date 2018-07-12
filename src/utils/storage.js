@@ -44,3 +44,34 @@ export function detect() {
   return true;
 }
 
+export function pushChildren(parent, children){
+  children.map((child) => {
+    parent.map((parent) => {
+      if(!parent.children) {
+        parent.children = [];
+      }
+      if(child.productTypeId === parent.id){
+        parent.children.push(child)
+      }
+    })
+  })
+}
+
+export function productCombine(data = []){
+  const norm = {};
+  data.map(item => {
+    if(item.spec1){
+      if(!norm.spec1){
+        norm.spec1 = []
+      }
+      norm.spec1.push(item.spec1)
+    }
+    if(item.spec2){
+      if(!norm.spec2){
+        norm.spec2 = []
+      }
+      norm.spec2.push(item.spec2)
+    }
+  })
+  return norm;
+}

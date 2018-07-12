@@ -34,13 +34,15 @@ import {
   Tabs,
   TabPane,
   Table,
-  TableColumn
+  TableColumn,
+  Badge
 } from 'element-ui'
 // 按需引入部分组件
-import MintUi from 'mint-ui';
+import MintUi from 'mint-ui'
 import App from './App'
 import routes from './router'
 import store from './store/state'
+import * as customFilters from './filters/index'
 import 'mint-ui/lib/style.css'
 import './style/common.css'
 
@@ -71,9 +73,9 @@ Vue.use(BreadcrumbItem)
 Vue.use(Pagination)
 Vue.use(Tabs)
 Vue.use(TabPane)
-Vue.use(Table);
-Vue.use(TableColumn);
-
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Badge)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
@@ -94,11 +96,16 @@ const router = new VueRouter({
       return savedPosition
     } else {
       if (from.meta.keepAlive) {
-        from.meta.savedPosition = document.body.scrollTop;
+        from.meta.savedPosition = document.body.scrollTop
       }
-      return { x: 0, y: to.meta.savedPosition || 0 }
+      return {x: 0, y: to.meta.savedPosition || 0}
     }
   }
+})
+
+// 绑定过滤器
+Object.keys(customFilters).forEach(key => {
+  Vue.filter(key, customFilters[key])
 })
 
 /* eslint-disable no-new */
@@ -106,6 +113,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

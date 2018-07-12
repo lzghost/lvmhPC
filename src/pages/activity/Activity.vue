@@ -1,25 +1,43 @@
 <template>
-  <el-main style="width:100%;height:100%;">
-    <ActivityMb v-if="global.isPc === false"/>
-    <ActivityMb />
-    <ActivityMb />
-    <ActivityMb />
-  </el-main>
+  <div style="background-color: black;width:100%;height:100%;">
+    <el-main v-if="global.isPc === false" style="width:100%;height:100%;">
+      <ActivityMb v-for="cap in campaignList" :key="cap.id" :camp="cap" @click.native="openPop(cap.id)"/>
+    </el-main>
+    <el-main v-else style="width:100%;height:100%;padding-top: 33px;">
+      <el-row>
+        <div style="margin: 40px 0;">
+          <img src="../../assets/logo.png"/>
+        </div>
+      </el-row>
+      <el-row style="padding-bottom: 30px">
+        <el-col :span="20" :offset="2" v-for="cap in campaignList" :key="cap.id" @click.native="openPop(cap.id)">
+          <Activity :camp="cap" />
+        </el-col>
+      </el-row>
+      <el-row style="color: white">
+        @2018 LVMH
+      </el-row>
+    </el-main>
+  </div>
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex'
   import ActivityMb from '../../components/activity/ActivityMb.vue'
-  import { mapState } from 'vuex'
+  import Activity from '../../components/activity/Activity'
+  import { activityList } from '../../service/index'
+
   export default {
-    name: '',
     data(){
-      return {}
+      return {
+        campaignList: [],
+      }
     },
     components:{
-      ActivityMb
+      ActivityMb, Activity
     },
     mounted() {
-
+      this.getCampaignList();
     },
     computed:{
       ...mapState([
@@ -27,7 +45,20 @@
       ])
     },
     methods:{
-
+      async getCampaignList(){
+        const res = await activityList();
+        if(res.status === 0){
+          this.campaignList = res.data;
+        }
+      },
+      ...mapMutations({
+        chooseCampaign: 'INIT_CAMPAIGN'
+      }),
+      openPop(id){
+        console.log(id)
+        this.chooseCampaign({id})
+        this.$router.push('/home')
+      }
     }
   }
 </script>

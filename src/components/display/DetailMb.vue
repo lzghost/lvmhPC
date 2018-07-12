@@ -1,0 +1,155 @@
+<template>
+<div>
+    <el-main style="margin-bottom:60px;">
+        <swiper :min-moving-distance="moveDistance" class="swiper-mb">
+            <swiper-item>
+                <img src="../../assets/product-1.png" style="width:100%;height:100%;">
+            </swiper-item>
+            <swiper-item>
+                <img src="../../assets/product-1.png" style="width:100%;height:100%;">
+            </swiper-item>
+            <swiper-item>
+                <img src="../../assets/product-1.png" style="width:100%;height:100%;">
+            </swiper-item>
+        </swiper>
+        <el-row :gutter="0">
+            <el-col :span="22" :offset="1">
+                <Code></Code>
+                <div class="title-name">全新Dior迪奥小姐香氛</div>
+                <el-row :gutter="0" class="priceCard">
+                    <el-col :span="5">
+                        <div class="priceNow">
+                        ￥300
+                        </div>
+                    </el-col>
+                    <el-col :offset="1" :span="6" style="height: 100%;">
+                        <div class="original">
+                        ¥2,100
+                        </div>
+                    </el-col>
+                </el-row>
+                <div class="des">全新Dior迪奥小姐香氛，散发感性迷人的高订气质：
+                    格拉斯五月玫瑰与土耳其大马士革玫瑰打造精致蕾丝裙装，卡拉布里亚佛手柑的柑橘香调如清新“蝴蝶结”。法属圭亚那蔷薇木和留尼汪岛粉红胡椒交织共舞，为这件高订“刺绣”更添生动辛辣。
+                    繁花谱写的爱情宣言，带给你一见钟情的芬芳气息。 
+                </div>
+                <Norm />
+                <el-row :gutter="10" style="margin-top: 20px;height: 28px;">
+                    <el-col :span="4" style="text-align: left;height: 28px;line-height: 28px;">数量</el-col>
+                    <el-col :span="7" style="text-align: right;font-size: 12px;color:#999999;height: 28px;line-height: 28px;">
+                        库存:5000
+                    </el-col>
+                    <el-col :span="13">
+                        <el-input-number size="mini" v-model="count"></el-input-number>
+                    </el-col>
+                </el-row>
+            </el-col>
+      </el-row>
+    </el-main>
+    <el-row class="nav-good">
+          <el-col :span="4" style="height:100%">
+              <img src="../../assets/mobile/pagehome.png" width="25" height="24" style="margin:13px auto;">
+          </el-col>
+          <el-col :span="4" style="height:100%">
+              <img src="../../assets/mobile/cart.png" width="25" height="24" style="margin:13px auto;">
+          </el-col>
+          <el-col :span="16">
+              <div class="cart">加入购物车</div>
+          </el-col>
+      </el-row>
+      </div>
+</template>
+
+<script>
+import { mapMutations } from "vuex";
+import { Swiper, SwiperItem } from "vux";
+import Norm from "../../components/card/norm.vue";
+import Code from "../../components/card/GoodCode.vue";
+import Count from "../../components/cart/Count.vue";
+
+export default {
+  data() {
+    return {
+      moveDistance: 60,
+      count: 1
+    };
+  },
+  async beforeMount() {},
+  mounted() {},
+  components: {
+    Swiper,
+    SwiperItem,
+    Norm,
+    Code,
+    Count
+  },
+  computed: {},
+  methods: {},
+  watch: {}
+};
+</script>
+
+<style scoped>
+.swiper-mb {
+  border: 1px solid rgba(243, 243, 243, 1);
+}
+.title-name {
+  line-height: 22px;
+  color: rgba(51, 51, 51, 1);
+  font-size: 16px;
+  text-align: left;
+  margin-top: 3px;
+}
+.priceCard {
+  margin-top: 7px;
+  height: 22px;
+}
+.priceNow {
+  color: #b98e2b;
+  font-size: 16px;
+  text-align: left;
+}
+.original {
+  color: #999999;
+  font-size: 12px;
+  line-height: 25px;
+  color: rgba(153, 153, 153, 1);
+  text-align: left;
+  height: 100%;
+  text-decoration: line-through;
+}
+.des {
+  line-height: 17px;
+  color: rgba(102, 102, 102, 1);
+  font-size: 12px;
+  text-align: left;
+  padding-bottom: 19px;
+}
+.nav-good {
+  height: 49px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: undefined, inset 0px 0.5px 0px 0px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#d9d9d9), color-stop(50%, #d9d9d9), color-stop(50%, transparent));
+    background-image: linear-gradient(180deg, #d9d9d9, #d9d9d9 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: #fafafa;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    z-index: 999;
+}
+.cart {
+  height: 49px;
+  background-color: rgba(215, 178, 90, 1);
+  line-height: 49px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  text-align: center;
+}
+</style>

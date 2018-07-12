@@ -48,6 +48,10 @@ const originalConfig = {
         options: vueLoaderConfig
       },
       {
+        test: /\.less$/,
+        loader: 'less-loader',
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
@@ -94,5 +98,8 @@ const originalConfig = {
 
 
 module.exports = vuxLoader.merge(originalConfig, {
-  plugins: ['vux-ui']
+  plugins: [
+    {'name':'vux-ui'},
+    {'name': 'less-theme', path: 'src/style/vux.less'}
+  ]
 })

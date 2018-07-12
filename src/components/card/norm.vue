@@ -1,13 +1,28 @@
 <template>
   <div class="body">
     <div>规格</div>
-    <el-row :gutter="20" style="margin-top: 5px;">
-      <el-col :span="5">
+    <el-row :gutter="0" style="margin-top: 5px;">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
         <div class="active-capacity">
           50ml
         </div>
       </el-col>
-      <el-col :span="5">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
         <div class="capacity">
           100ml
         </div>
@@ -16,13 +31,13 @@
     <div style="margin-top: 15px;">
       型号
     </div>
-    <el-row :gutter="20" style="margin-top: 6px;">
-      <el-col :span="2">
+    <el-row :gutter="0" style="margin-top: 6px;">
+      <el-col :xs="3" :sm="6" :md="4" :lg="3" :xl="1">
         <div class="active-type">
           01
         </div>
       </el-col>
-      <el-col :span="2">
+      <el-col :xs="3" :sm="6" :md="4" :lg="3" :xl="1">
         <div class="type">
           02
         </div>

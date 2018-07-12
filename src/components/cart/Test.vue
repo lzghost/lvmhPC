@@ -1,0 +1,306 @@
+<template>
+  <div :class="disabled ? 'vux-checklist-disabled' : ''" class="cart-mb-wrapper">
+    <div v-show="title" class="weui-cells__title">{{ title }}</div>
+    <slot name="after-title"></slot>
+    <div class="weui-cells weui-cells_checkbox">
+      
+    </div>
+    <slot name="footer"></slot>
+  </div>
+</template>
+
+<script>
+import { getValue, getLabels, getKey, getInlineDesc } from './CheckList.js'
+import Base from 'vux/src/libs/base'
+import { Icon } from 'vux'
+  export default {
+  name: 'checklist',
+  components: {
+    Icon,
+  },
+  filters: {
+    getValue,
+    getKey
+  },
+  mixins: [Base],
+  props: {
+    name: String,
+    showError: Boolean,
+    title: String,
+    required: {
+      type: Boolean,
+      default: false
+    },
+    options: {
+      type: Array,
+      required: true
+    },
+    value: {
+      type: Array,
+      default: () => []
+    },
+    max: Number,
+    min: Number,
+    fillMode: Boolean,
+    randomOrder: Boolean,
+    checkDisabled: {
+      type: Boolean,
+      default: true
+    },
+    labelPosition: {
+      type: String,
+      default: 'right'
+    },
+    disabled: Boolean
+  },
+  data () {
+    return {
+      currentValue: [],
+      currentOptions: this.options,
+      tempValue: '' // used only for radio mode
+    }
+  },
+  beforeUpdate () {
+    if (this.isRadio) {
+      const length = this.currentValue.length
+      if (length > 1) {
+        this.currentValue = [this.currentValue[length - 1]]
+      }
+      const val = pure(this.currentValue)
+      this.tempValue = val.length ? val[0] : ''
+    }
+  },
+  created () {
+    this.handleChangeEvent = true
+    if (this.value) {
+      this.currentValue = this.value
+      if (this.isRadio) {
+        this.tempValue = this.isRadio ? this.value[0] : this.value
+      }
+    }
+    if (this.randomOrder) {
+      this.currentOptions = shuffle(this.options)
+    } else {
+      this.currentOptions = this.options
+    }
+  },
+  methods: {
+    getValue,
+    getKey,
+    getInlineDesc,
+    isDisabled (key) {
+      if (!this.checkDisabled) {
+        return false
+      }
+      if (this._max > 1) {
+        return this.currentValue.indexOf(key) === -1 && this.currentValue.length === this._max
+      }
+      return false
+    }
+  },
+  computed: {
+    isRadio () {
+      if (typeof this.max === 'undefined') {
+        return false
+      } else {
+        return this.max === 1
+      }
+    },
+    _total () {
+      return this.fillMode ? (this.options.length + 1) : this.options.length
+    },
+    _min () {
+      if (!this.required && !this.min) {
+        return 0
+      }
+      if (!this.required && this.min) {
+        return Math.min(this._total, this.min)
+      }
+      if (this.required) {
+        if (this.min) {
+          let max = Math.max(1, this.min)
+          return Math.min(this._total, max)
+        } else {
+          return 1
+        }
+      }
+    },
+    _max () {
+      if (!this.required && !this.max) {
+        return this._total
+      }
+      if (this.max) {
+        if (this.max > this._total) {
+          return this._total
+        }
+        return this.max
+      } else {
+        return this._total
+      }
+    },
+    valid () {
+      return this.currentValue.length >= this._min && this.currentValue.length <= this._max
+    }
+  },
+  watch: {
+    tempValue (val) {
+      const _val = val ? [val] : []
+      this.$emit('input', _val)
+      this.$emit('on-change', _val, getLabels(this.options, _val))
+    },
+    value (newVal) {
+      if (JSON.stringify(newVal) !== JSON.stringify(this.currentValue)) {
+        this.currentValue = newVal
+      }
+    },
+    options (val) {
+      this.currentOptions = val
+    },
+    currentValue (newVal) {
+      const val = pure(newVal)
+      if (!this.isRadio) {
+        this.$emit('input', val)
+        this.$emit('on-change', val, getLabels(this.options, val))
+        let err = {}
+        if (this._min) {
+          if (this.required) {
+            if (this.currentValue.length < this._min) {
+              err = {
+                min: this._min
+              }
+            }
+          } else {
+            if (this.currentValue.length && this.currentValue.length < this._min) {
+              err = {
+                min: this._min
+              }
+            }
+          }
+        }
+        if (!this.valid && this.dirty && Object.keys(err).length) {
+          this.$emit('on-error', err)
+        } else {
+          this.$emit('on-clear-error')
+        }
+      }
+    }
+  }
+}
+function pure (obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+</script>
+
+<style scoped>
+.weui-cells:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #D9D9D9;
+    color: #D9D9D9;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.weui-cells:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #D9D9D9;
+    color: #D9D9D9;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.weui-cells {
+    margin-top: 1.17647059em;
+    background-color: #FFFFFF;
+    line-height: 1.41176471;
+    font-size: 17px;
+    overflow: hidden;
+    position: relative;
+}
+.weui-cells__title + .weui-cells {
+    margin-top: 0;
+}
+
+.weui-cell:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #D9D9D9;
+    color: #D9D9D9;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    left: 15px;
+}
+
+.weui-cell {
+    padding: 10px 15px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+[class^="weui-icon-"]:before, [class*=" weui-icon-"]:before {
+    display: inline-block;
+    margin-left: .2em;
+    margin-right: .2em;
+}
+
+.weui-cells_checkbox .weui-icon-checked:before {
+    content: '\EA01';
+    color: #C9C9C9;
+    font-size: 23px;
+    display: block;
+}
+.weui-cells_checkbox .weui-check:checked + .weui-icon-checked:before {
+    content: '\EA06';
+    color: #D7B25A;
+}
+
+.weui-cells_checkbox .weui-check:checked + .vux-checklist-icon-checked:before {
+    color: #D7B25A;
+}
+
+.weui-cell:first-child:before {
+    display: none;
+}
+
+.good-name{
+line-height: 17px;
+color: rgba(51, 51, 51, 1);
+font-size: 12px;
+text-align: left;
+}
+.good-norm{
+line-height: 17px;
+color: rgba(153, 153, 153, 1);
+font-size: 12px;
+text-align: left;
+}
+.good-price{
+line-height: 20px;
+color: rgba(185, 142, 43, 1);
+font-size: 14px;
+text-align: left;
+}
+</style>

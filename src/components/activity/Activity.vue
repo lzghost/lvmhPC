@@ -1,36 +1,40 @@
 <template>
   <el-row class="activity">
     <el-col class="content" v-bind:style="{backgroundImage: 'url(' + camp.pic + ')'}">
-        <el-row style="height:100%;">
-            <el-col :span="5" :offset="19" class="next">
-                <div class="display" style="height:100%;width:100%;" >Next
-                    <div>--></div>
-                </div>
-            </el-col>
-        </el-row>
+      <el-row style="height:100%;">
+        <el-col :span="3" :offset="20" class="next">
+          <div class="display" style="height:100%;width:100%;">Next
+            <div>--></div>
+          </div>
+        </el-col>
+      </el-row>
     </el-col>
   </el-row>
 </template>
 
 <script>
   export default {
-    name: 'mb-activity',
     data(){
       return {
-        test: require('../../assets/activity-mb-one.png')
       }
     },
     props:['camp'],
+    mounted() {
+
+    },
   }
 </script>
 
 <style scoped>
   .activity{
-    height: 25%;
+    margin-bottom: 3px;
+    cursor: pointer;
   }
   .content{
-    height: 100%;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 400px;
+    background-size:100% 400px;
+    background-repeat:no-repeat;
   }
   .next{
     opacity: 0.28;
@@ -38,8 +42,8 @@
     line-height: 20px;
     color: rgba(255, 255, 255, 1);
     font-size: 14px;
-    text-align: left;
-    height: 46%;
+    height: 30%;
+    width: 10%;
     /* margin-top: 13%; */
     text-align: center;
     position: relative;

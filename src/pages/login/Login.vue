@@ -9,6 +9,7 @@
           <el-form-item prop="userName">
             <el-input class="input-login"
                       v-model="loginForm.userName"
+                      clearable
                       auto-complete="off">
               <img slot="prepend" src="../../assets/icon/user.png" style="background-color: transparent">
             </el-input>
@@ -19,50 +20,68 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="loginBtn">登录</el-button>
+            <el-button class="loginBtn" @click="doLogin">登录</el-button>
           </el-form-item>
         </el-form>
         <!--登录部分 end-->
       </el-col>
     </div>
-    <div class="container-mb login-mb-wrapper"  v-if="global.isPc === false">
+    <div class="container-mb login-mb-wrapper"  v-else>
       <div class="content"></div>
       <div class="logo-mb"></div>
       <div class="loginFormStyle-mb">
         <mt-cell>
-          <mt-field label="" placeholder="请输入用户名" >
+          <mt-field label="" v-model="loginForm.userName" placeholder="请输入用户名" >
           </mt-field>
           <img slot="icon" src="../../assets/mobile/user.png" width="21" height="24">
         </mt-cell>
         <mt-cell>
-          <mt-field label="" placeholder="请输入密码" >
+          <mt-field label="" v-model="loginForm.passWord" placeholder="请输入密码" >
           </mt-field>
           <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
         </mt-cell>
-      </div>        
-      <mt-button plain type="default" size="large">登录</mt-button>
+      </div>
+      <mt-button plain type="default" size="large" @click="doLogin">登录</mt-button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { login } from '../../service/index'
 
 export default {
-  name: "Home",
+  name: "Login",
   data() {
     return {
       loginForm: {
         userName: "",
         passWord: ""
-      }
+      },
     };
   },
-  mounted() {},
+  mounted() {
+
+  },
   computed: {
     ...mapState(["global"])
   },
-  methods: {}
+  methods: {
+    async doLogin(){
+      const param = {
+        account: this.loginForm.userName, //yimlink.defia',
+        password: this.loginForm.passWord,
+      }
+      const res = await login(param);
+      if(res.status === 0){
+        this.$router.push('/campaigns')
+      }else if(this.global.isPc){
+
+      }else{
+
+      }
+    }
+  }
 };
 </script>
 

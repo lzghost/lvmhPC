@@ -2,6 +2,13 @@
  * Created by lizheng on 2018/6/23.
  */
 //定义dispatch的action名字，相当于redux中的reducer中的执行
+export const INIT_CAMPAIGN = 'INIT_CAMPAIGN' //初始化活动
+export const INIT_CAMPAIGN_STORE = 'INIT_CAMPAIGN_STORE'//初始化从local
+export const INIT_CART_NUM = 'INIT_CART_NUM' //初始化购物车数量
+export const INIT_MENU = 'INIT_MENU' //菜单数据
+export const INIT_GOODS = 'INIT_GOODS'//
+export const RELOAD_GOODS = 'RELOAD_GOODS'
+export const CHANGE_BREAD = 'CHANGE_BREAD'//修改面包
 export const RECORD_ADDRESS = 'RECORD_ADDRESS'
 export const ADD_CART = 'ADD_CART'
 export const REDUCE_CART = 'REDUCE_CART'

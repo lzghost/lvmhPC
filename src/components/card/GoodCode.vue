@@ -1,30 +1,20 @@
 <template>
   <div class="code">
-    F084055009
+    {{ codeValue }}
   </div>
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
+  import {mapMutations} from 'vuex'
 
-    export default {
-        data(){
-            return {}
-        },
-        async beforeMount(){
-        },
-        mounted(){
-        },
-        components: {},
-        computed: {},
-        methods: {},
-        watch: {}
-    }
+  export default {
+    props:['codeValue']
+  }
 
 </script>
 
 <style scoped>
-  .code{
+  .code {
     text-align: left;
     color: #999999;
     font-size: 12px;

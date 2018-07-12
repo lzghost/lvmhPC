@@ -2,6 +2,13 @@
  * Created by lizheng on 2018/6/6.
  */
 import {
+  INIT_CAMPAIGN,
+  INIT_MENU,
+  INIT_CAMPAIGN_STORE,
+  INIT_GOODS,
+  RELOAD_GOODS,
+  INIT_CART_NUM,
+  CHANGE_BREAD,
   RECORD_ADDRESS,
   ADD_CART,
   REDUCE_CART,
@@ -37,6 +44,35 @@ import {setStore, getStore} from '../utils/storage'
 
 
 export default {
+  [INIT_CAMPAIGN](state,campaign){
+    state.campaign = { ...state.campaign, ...campaign}
+    setStore('campaign', state.campaign)
+  },
+  [INIT_CAMPAIGN_STORE](state){
+    const campaign = getStore('campaign');
+    if (campaign) {
+      state.campaign = JSON.parse(campaign);
+    }
+  },
+  [INIT_MENU](state,categories){
+    state.categories = { ...state.categories, ...categories}
+  },
+  [INIT_GOODS](state, goods){
+    state.goods = goods;
+    setStore('goods', state.goods)
+  },
+  [RELOAD_GOODS](state){
+    const goods = getStore('goods');
+    if (goods) {
+      state.goods = JSON.parse(goods);
+    }
+  },
+  [INIT_CART_NUM](state, cartList){
+    state.cartList = { ...state.cartList, ...cartList }
+  },
+  [CHANGE_BREAD](state, bread){
+    state.bread = bread;
+  },
   // 记录当前经度纬度
   [RECORD_ADDRESS](state, {
                      latitude,

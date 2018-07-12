@@ -4,26 +4,21 @@
       <el-row>
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
       </el-row>
-      <el-row :gutter="10">
-        <el-col :span="12" :offset="2">
+      <el-row :gutter="0">
+        <el-col :span="10" :offset="2">
           <el-carousel arrow="always" :autoplay="false" height="474px">
-            <el-carousel-item v-for="item in 4" :key="item" :label="item" name="test">
-              <img src="../../assets/product-1.png" class="image"/>
+            <el-carousel-item v-for="item in productAndPic" :key="item.id" name="test">
+              <img :src="item.url640" class="image"/>
             </el-carousel-item>
           </el-carousel>
         </el-col>
         <el-col :span="8" :offset="2">
-          <Code></Code>
-          <div>全新Dior迪奥小姐香氛</div>
-          <div>全新Dior迪奥小姐香氛，散发感性迷人的高订气质：
-格拉斯五月玫瑰与土耳其大马士革玫瑰打造精致蕾丝裙装，卡拉布里亚佛手柑的柑橘香调如清新“蝴蝶结”。法属圭亚那蔷薇木和留尼汪岛粉红胡椒交织共舞，为这件高订“刺绣”更添生动辛辣。
-繁花谱写的爱情宣言，带给你一见钟情的芬芳气息。 </div>
-          <Norm />
+          <Code :codeValue="product.sku"></Code>
+          <div class="pro-name">{{ product.name }}</div>
+          <div class="pro-desc">{{ product.description }}</div>
+          <Norm v-if="spec === null"/>
           <Count />
           <CartBtn />
         </el-col>
@@ -38,19 +33,50 @@
   import Code from '../../components/card/GoodCode.vue'
   import Count from '../../components/cart/Count.vue'
   import CartBtn from '../../components/cart/CartBtn.vue'
+  import { goodProduct, getProductPic, getGoodDetail } from '../../service/index'
+  import { productCombine } from '../../utils/storage'
   export default {
     name: 'GoodDetail',
     data(){
-      return {}
+      return {
+        spec: null,
+        productPic: [],
+        products: {},
+        select: 0,
+      }
     },
     components:{
         Menu,Norm,Code,Count,CartBtn
     },
-    mounted() {
-
+    created(){
+      this.changeVisible()
     },
-    method(){
-
+    computed: {
+      product(){
+        return this.productAndPic.length > 0 ? this.productAndPic[this.select] : {}
+      },
+      productAndPic(){
+        const result = [];
+        this.productPic.map((item) => {
+          this.products.map((good) => {
+            if(item.goodId === good.goodId){
+              result.push({...item, ...good})
+            }
+          })
+        })
+        return result;
+      }
+    },
+    methods: {
+      async changeVisible(){
+        const goodId = this.$route.query.id;
+        const products = await goodProduct(goodId);
+        this.spec = productCombine(products.data);
+        this.products = products.data;
+        const productPicture = await getProductPic(goodId)
+        this.productPic = productPicture.data;
+        this.isShow = true
+      },
     }
   }
 </script>
@@ -63,10 +89,23 @@
     background-image: url('../../assets/bg.png');
   }
   .image{
-    height: 474px;
-    width: 740px;
+    height: 399px;
+    width: 399px;
   }
   .el-carousel{
     background-color: rgba(0,0,0,0);
+  }
+  .pro-name{
+    height: 33px;
+    line-height: 33px;
+    color: rgba(51, 51, 51, 1);
+    font-size: 24px;
+    text-align: left;
+  }
+  .pro-desc{
+    line-height: 20px;
+    color: rgba(102, 102, 102, 1);
+    font-size: 14px;
+    text-align: left;
   }
 </style>
