@@ -2,12 +2,27 @@
   <div class="body">
     <div>规格</div>
     <el-row :gutter="0" style="margin-top: 5px;">
-      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
         <div class="active-capacity">
           50ml
         </div>
       </el-col>
-      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
+        <div class="capacity">
+          100ml
+        </div>
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" :xl="1">
         <div class="capacity">
           100ml
         </div>

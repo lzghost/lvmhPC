@@ -1,8 +1,8 @@
 <template>
   <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }" shadow="never">
-    <router-link :to="{path: '/goodDetail', query: {}}">
-      <img :src="goodInfo.pic" class="image">
-    </router-link>
+    <!--<router-link :to="{path: 'goodDetail', query: { id: goodInfo.id }}">-->
+      <img :src="goodInfo.pic" class="image" @click="goToDetails(goodInfo.id)">
+    <!--</router-link>-->
     <!--<el-row :gutter="0" class="desc">-->
     <!--<el-col :span="12">-->
     <!--<div class="code">-->
@@ -57,7 +57,9 @@
 
     },
     methods: {
-
+      goToDetails(id) {
+        this.$router.push({name: 'goodDetail', query: { id } });
+      }
     }
   }
 </script>

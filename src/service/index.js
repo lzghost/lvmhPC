@@ -40,7 +40,7 @@ export function categorieInfo(typeId){
   return request(Api.typeGoods(typeId), 'GET')
 }
 
-export function goodDetail(goodId){
+export function getGoodDetail(goodId){
   return request(Api.goodDetail(goodId), 'GET')
 }
 

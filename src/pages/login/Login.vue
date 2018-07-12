@@ -51,7 +51,7 @@ import { mapState, mapMutations } from "vuex";
 import { login } from '../../service/index'
 
 export default {
-  name: "Home",
+  name: "Login",
   data() {
     return {
       loginForm: {

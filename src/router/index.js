@@ -9,7 +9,7 @@ import Order from "../pages/my/Order.vue"
 import Cart from "../pages/cart/Cart.vue"
 
 
-import Temp from "../components/cart/CheckList.vue";
+import Temp from "../components/display/DetailMb.vue";
 import CartMb from "../pages/cart/CartMb.vue";
 // Vue.use(Router)
 
@@ -21,9 +21,6 @@ export default [
   {
     path: '/campaigns',
     component: Activity,
-    meta: {
-      keepAlive: true,
-    },
   },
   {
     path: '/cat',
@@ -33,9 +30,6 @@ export default [
   {
     path: '/',
     component: Nav,
-    meta: {
-      keepAlive: true,
-    },
     children:[
       {
         path: 'home',
@@ -51,6 +45,7 @@ export default [
       },
       {
         path: 'goodDetail',
+        name: 'goodDetail',
         component: GoodDetail,
       },{
         path: 'order',
