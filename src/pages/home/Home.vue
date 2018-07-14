@@ -55,7 +55,7 @@
       <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
         <div v-for="good in showAllGoods" :key="good.id">
           <el-col :span="10" :offset="1">
-            <CardMb :goodInfo="good" @click.navtive=""/>
+            <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
           </el-col>
           <el-col :span="1">
             &#12288;
@@ -183,6 +183,9 @@
         this.$router.push({
           name: 'cat',
         })
+      },
+      goToDetails(id) {
+        this.$router.push({name: 'detailMb', query: { id } });
       }
     },
   }

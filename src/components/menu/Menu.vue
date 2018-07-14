@@ -46,9 +46,9 @@
       ...mapState([
         'global', 'cartList'
       ]),
-      cartNum () {
-        if (this.cartList.cartNum) {
-          return cartList.cartNum > 99 ? '99+' : cartList.cartNum
+      cartNum(){
+        if(this.cartList.cartNum){
+          return this.cartList.cartNum > 99 ? '99+' : this.cartList.cartNum;
         }
         return 0
       }

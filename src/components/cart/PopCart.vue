@@ -5,7 +5,7 @@
         <el-col :span="5">
           <el-row :gutter="0">
             <el-col>
-              <img :src="popPic" class="image"/>
+              <img :src="product.url160" class="image"/>
             </el-col>
           </el-row>
         </el-col>
@@ -56,14 +56,14 @@
     <el-row :gutter="20" style="margin-top: 20px;height: 28px;">
       <el-col :span="4" style="text-align: left;height: 28px;line-height: 28px;">数量</el-col>
       <el-col :span="12" style="text-align: right;font-size: 12px;color:#999999;height: 28px;line-height: 28px;">
-        库存:{{ goodInfo.stock }}
+        库存:{{ product.stock }}
       </el-col>
       <el-col :span="7">
         <el-input-number size="mini" v-model="count"></el-input-number>
       </el-col>
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="addToCart(goodInfo.id, $event)">
+      <el-button type="text" @click="addToCart(product.id, $event)">
         <div class="add">
           <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购入车
         </div>
@@ -82,23 +82,33 @@
       return {
         count: 1,
         showMoveDot: [],
+        select: 0,
       }
     },
     props: ['isShow', 'closePop', 'spec', 'productPic', 'goodInfo', 'products'],
-    mounted() {
-
-    },
     computed: {
       ...mapState([
-        'cart','campaign'
+        'cartList','campaign'
       ]),
-      popPic(){
-        if(this.productPic && this.productPic[0]){
-          return this.productPic[0].url160
-        }
-      }
+      productAndPic(){
+        const result = [];
+        this.productPic.map((item) => {
+          this.products.map((good) => {
+            if(item.goodId === good.goodId){
+              result.push({...item, ...good})
+            }
+          })
+        })
+        return result;
+      },
+      product(){
+        return this.productAndPic.length > 0 ? this.productAndPic[this.select] : {}
+      },
     },
     methods: {
+      ...mapMutations({
+        initCart: 'INIT_CART_NUM'
+      }),
       async addToCart(goodId, event){
         const param = {
           "items": [
@@ -110,6 +120,9 @@
         }
         const result = await addCart(this.campaign.id, param);
         if(result.status === 0){
+          this.initCart({
+            cartNum: this.count + this.cartList.cartNum,
+          })
           let elLeft = event.target.getBoundingClientRect().left;
           let elBottom = event.target.getBoundingClientRect().bottom;
           this.showMoveDot.push(true);
