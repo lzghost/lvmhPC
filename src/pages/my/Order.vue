@@ -110,7 +110,7 @@
   import Order from '@/components/order/Order.vue'
 
   export default {
-    name: 'Order',
+    name: 'Home',
     data () {
       return {
         orderList: []
