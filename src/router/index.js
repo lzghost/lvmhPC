@@ -8,6 +8,7 @@ import Cat from '../pages/cat/Cat'
 import Order from '../pages/my/Order.vue'
 import OrderMb from '../pages/my/OrderMb.vue'
 import Cart from '../pages/cart/Cart.vue'
+import DetailMb from '../pages/good/DetailMb'
 
 import OrderDetail from '@/components/order/OrderDetail.vue'
 import PayMoney from '@/components/pay/PayMoney.vue'
@@ -30,9 +31,14 @@ export default [
     component: Cat,
   },
   {
+    path: '/detailMb',
+    name: 'detailMb',
+    component: DetailMb,
+  },
+  {
     path: '/',
     component: Nav,
-    children: [
+    children:[
       {
         path: 'home',
         name: 'home',

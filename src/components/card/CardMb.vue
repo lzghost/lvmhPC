@@ -46,7 +46,7 @@ export default {
 <style scoped>
   .pro{
     line-height: 17px;
-    min-height: 34px;
+    min-height: 51px;
     color: rgba(51, 51, 51, 1);
     font-size: 12px;
     text-align: left;

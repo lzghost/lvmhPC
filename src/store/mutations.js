@@ -55,7 +55,7 @@ export default {
     }
   },
   [INIT_MENU](state,categories){
-    state.categories = { ...state.categories, ...categories}
+    state.categories = [ ...state.categories, ...categories]
   },
   [INIT_GOODS](state, goods){
     state.goods = goods;

@@ -2,14 +2,8 @@
   <div>
     <el-main style="margin-bottom:60px;">
       <swiper :min-moving-distance="moveDistance" class="swiper-mb">
-        <swiper-item>
-          <img src="../../assets/product-1.png" style="width:100%;height:100%;">
-        </swiper-item>
-        <swiper-item>
-          <img src="../../assets/product-1.png" style="width:100%;height:100%;">
-        </swiper-item>
-        <swiper-item>
-          <img src="../../assets/product-1.png" style="width:100%;height:100%;">
+        <swiper-item v-for="item in productAndPic" :key="item.id">
+          <img :src="item.url160" style="width:100%;height:100%;">
         </swiper-item>
       </swiper>
       <el-row :gutter="0">
@@ -60,33 +54,82 @@
 </template>
 
 <script>
-  import {mapMutations} from "vuex";
-  import {Swiper, SwiperItem} from "vux";
-  import Norm from "../../components/card/norm.vue";
-  import Code from "../../components/card/GoodCode.vue";
-  import Count from "../../components/cart/Count.vue";
+  import { mapState, mapMutations } from "vuex";
+  import { Swiper, SwiperItem } from "vux"
+  import Norm from '../../components/card/norm'
+  import { goodProduct, getProductPic, addCart } from '../../service/index'
+  import { productCombine } from '../../utils/storage'
 
   export default {
     data() {
       return {
         moveDistance: 60,
-        count: 1
+        count: 1,
+        spec: null,
+        productPic: [],
+        products: {},
+        select: 0,
       };
     },
-    async beforeMount() {
+    components:{
+      Swiper, SwiperItem, Norm
     },
-    mounted() {
+    created() {
+      this.changeVisible()
     },
-    components: {
-      Swiper,
-      SwiperItem,
-      Norm,
-      Code,
-      Count
+    computed: {
+      ...mapState([
+        'categories', 'cartList', 'campaign', 'global'
+      ]),
+      product() {
+        return this.productAndPic.length > 0 ? this.productAndPic[this.select] : {}
+      },
+      productAndPic() {
+        const result = [];
+        this.productPic.map((item) => {
+          this.products.map((good) => {
+            if (item.goodId === good.goodId) {
+              result.push({...item, ...good})
+            }
+          })
+        })
+        return result;
+      },
     },
-    computed: {},
-    methods: {},
-    watch: {}
+    methods: {
+      ...mapMutations({
+        initCart: 'INIT_CART_NUM'
+      }),
+      async changeVisible() {
+        const goodId = this.$route.query.id;
+        const products = await goodProduct(goodId);
+        this.spec = productCombine(products.data);
+        this.products = products.data;
+        const productPicture = await getProductPic(goodId)
+        this.productPic = productPicture.data;
+        this.isShow = true
+      },
+      async addProToCart(goodId) {
+        const param = {
+          "items": [
+            {
+              "productId": goodId,
+              "qty": this.count
+            }
+          ]
+        }
+        const result = await addCart(this.campaign.id, param);
+        if (result.status === 0) {
+          this.initCart({
+            cartNum: this.count + this.cartList.cartNum,
+          })
+          // let elLeft = event.target.getBoundingClientRect().left;
+          // let elBottom = event.target.getBoundingClientRect().bottom;
+          // this.showMoveDot.push(true);
+          // this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);
+        }
+      }
+    }
   };
 </script>
 
