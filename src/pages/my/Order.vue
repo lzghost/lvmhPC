@@ -1,64 +1,106 @@
 <template>
-  <el-main>
-    <el-row class="profile">
-      <el-col :span="8" :offset="8">
-        <img src="../../assets/profile.png" width="122" height="122" style="margin-top: 32px"/>
-        <div class="name">
-          Erik Banks
-        </div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="8" :offset="8">
-        <div class="given-chy">
-          GIVENCHY
-        </div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="18" :offset="3">
-        <el-tabs type="border-card" :stretch="true">
-          <el-tab-pane label="全部订单">
-            <Order
-              v-for="order in orderList"
-              :key="order.id"
-              :orderId="order.id"
-              :tableData="order.items"
-              :orderDate="order.orderDate"
-              :status="order.status"
-              :amount="order.amount"
-              :totalQty="order.amount"
-              :orderNo="order.orderNo"
-            ></Order>
-          </el-tab-pane>
-          <el-tab-pane label="未付款">
-            <Order
-              v-for="order in getNoPaiedOrder"
-              :key="order.id"
-              :tableData="order.items"
-              :orderDate="order.orderDate"
-              :status="order.status"
-              :amount="order.amount"
-              :totalQty="order.amount"
-              :orderNo="order.orderNo"
-            ></Order>
-          </el-tab-pane>
-          <el-tab-pane label="已付款">
-            <Order
-              v-for="order in getPaiedOrder"
-              :key="order.id"
-              :tableData="order.items"
-              :orderDate="order.orderDate"
-              :status="order.status"
-              :amount="order.amount"
-              :totalQty="order.amount"
-              :orderNo="order.orderNo"
-            ></Order>
-          </el-tab-pane>
-        </el-tabs>
-      </el-col>
-    </el-row>
-  </el-main>
+  <div>
+    <div v-if="global.isPc">
+      <el-main>
+        <el-row class="profile">
+          <el-col :span="8" :offset="8">
+            <img src="../../assets/profile.png" width="122" height="122" style="margin-top: 32px"/>
+            <div class="name">
+              Erik Banks
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8" :offset="8">
+            <div class="given-chy">
+              GIVENCHY
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="18" :offset="3">
+            <el-tabs type="border-card" :stretch="true">
+              <el-tab-pane label="全部订单">
+                <Order
+                  v-for="order in orderList"
+                  :key="order.id"
+                  :orderId="order.id"
+                  :tableData="order.items"
+                  :orderDate="order.orderDate"
+                  :status="order.status"
+                  :amount="order.amount"
+                  :totalQty="order.amount"
+                  :orderNo="order.orderNo"
+                ></Order>
+              </el-tab-pane>
+              <el-tab-pane label="未付款">
+                <Order
+                  v-for="order in getNoPaiedOrder"
+                  :key="order.id"
+                  :orderId="order.id"
+                  :tableData="order.items"
+                  :orderDate="order.orderDate"
+                  :status="order.status"
+                  :amount="order.amount"
+                  :totalQty="order.amount"
+                  :orderNo="order.orderNo"
+                ></Order>
+              </el-tab-pane>
+              <el-tab-pane label="已付款">
+                <Order
+                  v-for="order in getPaiedOrder"
+                  :key="order.id"
+                  :orderId="order.id"
+                  :tableData="order.items"
+                  :orderDate="order.orderDate"
+                  :status="order.status"
+                  :amount="order.amount"
+                  :totalQty="order.amount"
+                  :orderNo="order.orderNo"
+                ></Order>
+              </el-tab-pane>
+            </el-tabs>
+          </el-col>
+        </el-row>
+      </el-main>
+    </div>
+    <div v-else>
+      <el-row class="mb-profile">
+        <el-col :span="8" :offset="8">
+          <img src="../../assets/profile.png" width="122" height="122" style="margin-top: 32px"/>
+          <div class="mb-name">
+            Erik Banks
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8" :offset="8">
+          <div class="mb-given-chy">
+            GIVENCHY
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24" class="mb-nav-wrapper">
+          <router-link to="/orderMb/first">
+            <mt-cell title="全部订单">
+              <img slot="icon" src="../../assets/mobile/付款.png" width="20" height="20">
+            </mt-cell>
+          </router-link>
+          <router-link to="/orderMb/second">
+            <mt-cell title="未付款">
+               <img slot="icon" src="../../assets/mobile/付款.png" width="20" height="20">
+            </mt-cell>
+          </router-link>
+          <router-link to="/orderMb/third">
+            <mt-cell title="已付款">
+               <img slot="icon" src="../../assets/mobile/付款.png" width="20" height="20">
+            </mt-cell>
+          </router-link>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -68,7 +110,7 @@
   import Order from '@/components/order/Order.vue'
 
   export default {
-    name: 'Home',
+    name: 'Order',
     data () {
       return {
         orderList: []
@@ -81,6 +123,7 @@
       this.getOrderList()
     },
     computed: {
+      ...mapState(['global']),
       getNoPaiedOrder () {
         return this.orderList.filter(order => order.status === 2)
       },
@@ -123,8 +166,41 @@
     font-weight: 700;
   }
 
-  .el-tabs__item {
-    height: 60px;
+  .mb-profile {
+    height: 209px;
+    border-radius: 2px;
     background-color: rgba(255, 255, 255, 1);
+  }
+
+  .mb-name {
+    height: 28px;
+    line-height: 28px;
+    margin-top: 17px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    color: #333333;
+  }
+
+  .mb-given-chy {
+    height: 10px;
+    padding-bottom: 50px;
+    letter-spacing: .3em;
+    font-size: 10px;
+    font-weight: 400;
+  }
+
+  .mb-nav-wrapper {
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  a, a:hover, a:active {
+    text-decoration: none;
+    color: #333333;
+  }
+
+  .mint-cell {
+    border-bottom: 1px solid #E6E6E6;
   }
 </style>

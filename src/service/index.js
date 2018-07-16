@@ -67,3 +67,8 @@ export function orderList () {
 export function orderDetail (orderId) {
   return request(Api.orderInfo(orderId), 'GET')
 }
+
+// 查询购物车详情
+export function cartInfo (cartId) {
+  return request(Api.cartInfo(cartId), 'GET')
+}

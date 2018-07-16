@@ -6,6 +6,7 @@ import Activity from '../pages/activity/Activity.vue'
 import GoodDetail from '../pages/good/Detail.vue'
 import Cat from '../pages/cat/Cat'
 import Order from '../pages/my/Order.vue'
+import OrderMb from '../pages/my/OrderMb.vue'
 import Cart from '../pages/cart/Cart.vue'
 import DetailMb from '../pages/good/DetailMb'
 import Search from '../pages/home/Search'
@@ -61,6 +62,9 @@ export default [
       }, {
         path: 'order',
         component: Order,
+      }, {
+        path: 'orderMb/:orderType',
+        component: OrderMb
       }, {
         path: 'orderDetail/:orderId',
         component: OrderDetail
