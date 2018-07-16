@@ -1,5 +1,5 @@
 <template>
-  <el-row :gutter="0">
+  <el-row :gutter="0" class="menu-wrapper">
     <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2"></el-col>
     <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2">
       <router-link :to="{path: '/home'}">
@@ -9,7 +9,30 @@
     <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu, index) in menuData" :key="index">
       <Type :menu="menu"/>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="5" :lg="7" :xl="2">搜索</el-col>
+    <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="2">
+
+    </el-col>
+    <el-col :xs="4" :sm="4" :md="5" :lg="6" :xl="2" style="text-align: right">
+      <el-button
+        v-show="searchState"
+        @click.native="changeSearchState"
+        type="text">
+        <img
+          style="vertical-align: middle;"
+          width="16" height="16" src="../../assets/icon/search.png">
+      </el-button>
+      <el-input
+        v-show="!searchState"
+        @blur="searchStateTrue"
+        autofocus
+        clearable
+        placeholder="搜索"
+        size="mini"
+        ref="searchInput"
+        >
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-input>
+    </el-col>
     <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="2" clas="nav">
       <router-link to="/order">
         <el-button type="text">
@@ -20,7 +43,7 @@
     </el-col>
     <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="2" class="nav">
       <el-button type="text">
-        <el-badge :value="cartNum" :hidden="cartList.cartNum === 0" class="item" ref="cartContainer">
+        <el-badge :value="cartList.cartNum" :hidden="cartList.cartNum === 0" :max="99" class="item" ref="cartContainer">
           <img style="margin-right: 4px;" src="../../assets/icon/nav-cart.png" width="18" height="16"/>
         </el-badge>
         购物车
@@ -36,7 +59,9 @@
 
   export default {
     data () {
-      return {}
+      return {
+        searchState: true,
+      }
     },
     components: {
       Type
@@ -53,10 +78,21 @@
         return 0
       }
     },
-    mounted () {
-
+    watch:{
+      searchState(newValue, oldValue){
+        if(!newValue){
+          this.$nextTick(_ => this.$refs.searchInput.focus())
+        }
+      }
     },
-    methods: {}
+    methods: {
+      changeSearchState(){
+        this.searchState = !this.searchState;
+      },
+      searchStateTrue(){
+        this.searchState = true
+      }
+    }
   }
 </script>
 

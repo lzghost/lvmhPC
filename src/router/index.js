@@ -8,6 +8,7 @@ import Cat from '../pages/cat/Cat'
 import Order from '../pages/my/Order.vue'
 import Cart from '../pages/cart/Cart.vue'
 import DetailMb from '../pages/good/DetailMb'
+import Search from '../pages/home/Search'
 
 import OrderDetail from '@/components/order/OrderDetail.vue'
 import PayMoney from '@/components/pay/PayMoney.vue'
@@ -33,6 +34,11 @@ export default [
     path: '/detailMb',
     name: 'detailMb',
     component: DetailMb,
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search,
   },
   {
     path: '/',
