@@ -1,5 +1,5 @@
 <template>
-    <mt-tabbar v-model="selected" style="z-index:999">
+    <mt-tabbar v-model="selected" style="z-index:999" fixed>
         <mt-tab-item id="activity" @click.native="goToHome">
             <img slot="icon" :src="activityIcon"> 活动
         </mt-tab-item>

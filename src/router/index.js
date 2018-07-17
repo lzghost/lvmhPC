@@ -6,8 +6,10 @@ import Activity from '../pages/activity/Activity.vue'
 import GoodDetail from '../pages/good/Detail.vue'
 import Cat from '../pages/cat/Cat'
 import Order from '../pages/my/Order.vue'
+import OrderMb from '../pages/my/OrderMb.vue'
 import Cart from '../pages/cart/Cart.vue'
 import DetailMb from '../pages/good/DetailMb'
+import Search from '../pages/home/Search'
 
 import OrderDetail from '@/components/order/OrderDetail.vue'
 import PayMoney from '@/components/pay/PayMoney.vue'
@@ -35,6 +37,11 @@ export default [
     component: DetailMb,
   },
   {
+    path: '/search',
+    name: 'search',
+    component: Search,
+  },
+  {
     path: '/',
     component: Nav,
     children:[
@@ -55,6 +62,9 @@ export default [
       }, {
         path: 'order',
         component: Order,
+      }, {
+        path: 'orderMb/:orderType',
+        component: OrderMb
       }, {
         path: 'orderDetail/:orderId',
         component: OrderDetail

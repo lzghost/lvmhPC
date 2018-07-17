@@ -92,7 +92,7 @@
       ]),
       productAndPic(){
         const result = [];
-        this.productPic.map((item) => {
+        this.productPic.length && this.productPic.map((item) => {
           this.products.map((good) => {
             if(item.goodId === good.goodId){
               result.push({...item, ...good})

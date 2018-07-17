@@ -89,7 +89,7 @@
       },
       productAndPic() {
         const result = [];
-        this.productPic.map((item) => {
+        this.productPic && this.productPic.map((item) => {
           this.products.map((good) => {
             if (item.goodId === good.goodId) {
               result.push({...item, ...good})
@@ -136,6 +136,7 @@
           this.initCart({
             cartNum: this.count + this.cartList.cartNum,
           })
+          this.$
           // let elLeft = event.target.getBoundingClientRect().left;
           // let elBottom = event.target.getBoundingClientRect().bottom;
           // this.showMoveDot.push(true);

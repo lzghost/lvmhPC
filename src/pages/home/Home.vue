@@ -49,10 +49,19 @@
     </div>
     <div v-else>
       <Search
+        @on-focus="goToSearch"
+        @on-blur="showPro"
+        ref="homeSearch"
       >
         <img @click="goToMenuMb" slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 6px;">
+        <group-title style="text-align: left"> 搜索历史 </group-title>
+        <grid :cols="3" :show-lr-borders="false">
+          <grid-item v-for="i in 6" :key="i">
+            <span class="grid-center">{{i}}</span>
+          </grid-item>
+        </grid>
       </Search>
-      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
+      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;" v-show="isSearch">
         <div v-for="good in showAllGoods" :key="good.id">
           <el-col :span="10" :offset="1">
             <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
@@ -67,7 +76,7 @@
 </template>
 
 <script>
-  import { Search } from 'vux'
+  import { Search, Grid, GridItem, GroupTitle } from 'vux'
   import { mapState, mapMutations } from 'vuex'
   import ProCard from '../../components/card/ProCard.vue'
   import CardMb from '../../components/card/CardMb'
@@ -82,8 +91,6 @@
         pageSize: 8,
         total: 0,
         isShow: false,
-        // goods: [],
-        // showAllGoods: [],
         productDetail: {},
         spec: {},
         productPic: {},
@@ -92,6 +99,7 @@
         filter: {},
         type: 0,
         cat: 0,
+        isSearch: true,
       }
     },
     created(){
@@ -107,7 +115,7 @@
     mounted(){
     },
     components:{
-      ProCard, Search, CardMb, PopCart
+      ProCard, Search, CardMb, PopCart, Grid, GridItem, GroupTitle
     },
     computed:{
       ...mapState([
@@ -186,6 +194,16 @@
       },
       goToDetails(id) {
         this.$router.push({name: 'detailMb', query: { id } });
+      },
+      goToSearch(){
+        console.log(1)
+        // this.$refs.homeSearch.setBlur();
+        // this.$router.push('/search')
+        this.isSearch = false
+        this.$router.push('/search')
+      },
+      showPro(){
+        this.isSearch = true
       }
     },
   }
