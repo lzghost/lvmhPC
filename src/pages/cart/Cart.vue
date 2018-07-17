@@ -77,7 +77,7 @@
 
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import {cartInfo,placeOrder} from '@/service/index'
+  import {cartInfo,orderPlace} from '@/service/index'
 
   export default {
     name: 'Home',
@@ -109,6 +109,9 @@
       }
     },
     methods: {
+      ...mapState([
+        'global','categories','campaign', 'bread', 'goods'
+      ]),
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
@@ -131,7 +134,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          const id =this.placeOrder(this.multipleSelection);
+          const id =this.orderPlace(this.multipleSelection);
           this.$router.push({
             name: 'cartmb',
             query:{id:id }
@@ -148,14 +151,14 @@
         this.$router.push('/home');
       },
       async getCartInfo() {
-        const res = await cartInfo();
+        const res = await cartInfo(campaign.id);
         console.log('cartInfoList', res);
         if (res.status === 0) {
           this.cartInfoList = res.data
         }
       },
-      async placeOrder(list) {
-        const res = await placeOrder(list);
+      async orderPlace(list) {
+        const res = await orderPlace(campaign.id,list);
         console.log('cartInfoList', res);
         if (res.status === 0) {
           return res.data

@@ -69,6 +69,12 @@ export function orderDetail (orderId) {
 }
 
 // 查询购物车详情
-export function cartInfo (cartId) {
-  return request(Api.cartInfo(cartId), 'GET')
+export function cartInfo (campaignId) {
+  return request(Api.cartInfo(campaignId), 'GET')
+}
+
+
+// 查询购物车详情
+export function orderPlace (campaignId,goodList) {
+  return request(Api.orderPlace(campaignId), 'post',goodList)
 }
