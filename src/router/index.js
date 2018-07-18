@@ -38,7 +38,7 @@ export default [
   },
   {
     path: '/search',
-    name: 'search',
+    name: 'searchMb',
     component: Search,
   },
   {

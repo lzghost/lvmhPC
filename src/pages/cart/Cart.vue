@@ -134,7 +134,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          const id =this.orderPlace(this.multipleSelection);
+          const id = this.orderPlace(this.multipleSelection);
           this.$router.push({
             name: 'cartmb',
             query:{id:id }
@@ -211,7 +211,6 @@
     color: rgba(51, 51, 51, 1);
     font-size: 30px;
     text-align: left;
-    font-family: PingFangSC-Semibold;
   }
 
   .cart-back {
@@ -246,7 +245,6 @@
     color: rgba(102, 102, 102, 1);
     font-size: 14px;
     text-align: left;
-    font-family: PingFangSC-Regular;
 
   }
 
@@ -254,7 +252,6 @@
     color: #333333;
     font-size: 18px;
     text-align: left;
-    font-family: PingFangSC-Regular;
 
   }
 
@@ -295,7 +292,6 @@
     color: rgba(190, 65, 65, 1);
     font-size: 20px;
     text-align: right;
-    font-family: PingFangSC-Semibold;
   }
 
   .desc-text {

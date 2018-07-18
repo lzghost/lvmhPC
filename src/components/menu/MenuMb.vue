@@ -39,10 +39,10 @@ export default {
       this.$router.push('/cat')
     },
     goToHome() {
-      this.$router.push('/home')
+      this.$router.push('/campaigns')
     },
     goToCart() {
-      this.$router.push('/cart')
+      this.$router.push('/cartmb')
     },
     goToMy() {
       this.$router.push('/order')

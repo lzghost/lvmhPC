@@ -2,17 +2,19 @@
   <el-row :gutter="0" class="menu-wrapper">
     <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2"></el-col>
     <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2">
-      <router-link :to="{path: '/home'}">
+      <router-link :to="{path: '/campaigns'}">
         <el-button type="text">LVMH</el-button>
       </router-link>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu, index) in menuData" :key="index">
+    <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu, index) in menuData">
       <Type :menu="menu"/>
+    </el-col>
+    <el-col v-if="menuData.length < 3" :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu) in 3-menuData.length" :key="menu">
     </el-col>
     <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="2">
 
     </el-col>
-    <el-col :xs="4" :sm="4" :md="5" :lg="6" :xl="2" style="text-align: right">
+    <el-col :xs="4" :sm="4" :md="5" :lg="7" :xl="2" style="text-align: right">
       <el-button
         v-show="searchState"
         @click.native="changeSearchState"
@@ -23,17 +25,21 @@
       </el-button>
       <el-input
         v-show="!searchState"
-        @blur="searchStateTrue"
         autofocus
         clearable
+        v-model="keyWord"
+        @change="searchKeyWord"
         placeholder="搜索"
         size="mini"
         ref="searchInput"
         >
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <i slot="prefix" class="el-input__icon el-icon-search" @click="searchStateTrue"></i>
       </el-input>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="2" clas="nav">
+    <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="2">
+
+    </el-col>
+    <el-col :xs="4" :sm="4" :md="3" :lg="2" :xl="2" clas="nav">
       <router-link to="/order">
         <el-button type="text">
           <img style="margin-right: 4px;vertical-align: middle" src="../../assets/icon/mine.png" width="16"
@@ -41,35 +47,44 @@
         </el-button>
       </router-link>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="2" class="nav">
-      <el-button type="text">
-        <el-badge :value="cartList.cartNum" :hidden="cartList.cartNum === 0" :max="99" class="item" ref="cartContainer">
-          <img style="margin-right: 4px;" src="../../assets/icon/nav-cart.png" width="18" height="16"/>
-        </el-badge>
-        购物车
-      </el-button>
+    <el-col :xs="4" :sm="4" :md="3" :lg="2" :xl="2" class="nav">
+      <router-link to="/cart">
+        <el-button type="text">
+          <el-badge :value="cartList.cartNum" :hidden="cartList.cartNum === 0" :max="99" class="item" ref="cartContainer">
+            <img style="margin-right: 4px;" src="../../assets/icon/nav-cart.png" width="18" height="16"/>
+          </el-badge>
+          购物车
+        </el-button>
+      </router-link>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="2">EN</el-col>
+    <el-col :xs="4" :sm="4" :md="3" :lg="2" :xl="2">EN</el-col>
   </el-row>
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex'
+  import { searchGoods } from '../../service/index'
   import Type from './Type'
 
   export default {
     data () {
       return {
         searchState: true,
+        keyWord: ''
       }
     },
     components: {
       Type
     },
-    props: ['menuData'],
+    props: {
+      menuData: {
+        type: Array,
+        default: [],
+      }
+    },
     computed: {
       ...mapState([
-        'global', 'cartList'
+        'global', 'cartList', 'campaign'
       ]),
       cartNum(){
         if(this.cartList.cartNum){
@@ -86,11 +101,23 @@
       }
     },
     methods: {
+      ...mapMutations({
+        initGoods: 'INIT_GOODS'
+      }),
       changeSearchState(){
         this.searchState = !this.searchState;
       },
       searchStateTrue(){
         this.searchState = true
+        this.keyWord = ''
+      },
+      async searchKeyWord(){
+        const res = await searchGoods(this.campaign.id, {
+          keyword: this.keyWord
+        });
+        if(res.status === 0){
+          this.initGoods(res.data)
+        }
       }
     }
   }

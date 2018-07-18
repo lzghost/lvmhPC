@@ -1,7 +1,10 @@
 <template>
   <el-card :body-style="{ padding: '0px', width: '216px', marginLeft: 'auto', marginRight: 'auto' }" shadow="never">
     <!--<router-link :to="{path: 'goodDetail', query: { id: goodInfo.id }}">-->
-      <img :src="goodInfo.pic" class="image" @click="goToDetails(goodInfo.id)">
+      <!--<img :src="goodInfo.pic" class="image" @click="goToDetails(goodInfo.id)">-->
+    <div class="image" :style="{ backgroundImage: 'url(' + goodInfo.pic + ')' }" @click="goToDetails(goodInfo)">
+      <img v-if="goodInfo.stock <= 0" src="../../assets/icon/sell-out.png" style=""/>
+    </div>
     <!--</router-link>-->
     <!--<el-row :gutter="0" class="desc">-->
     <!--<el-col :span="12">-->
@@ -28,8 +31,8 @@
           ￥{{ goodInfo.price }}
         </div>
       </el-col>
-      <el-col :offset="1" :span="6" v-if="goodInfo.originPrice" style="height: 100%;">
-        <div class="original">
+      <el-col :offset="1" :span="6" style="height: 100%;">
+        <div class="original" v-if="goodInfo.originPrice">
           ¥{{ goodInfo.originPrice }}
         </div>
       </el-col>
@@ -57,7 +60,8 @@
 
     },
     methods: {
-      goToDetails(id) {
+      goToDetails(goodInfo) {
+        const id = goodInfo.id;
         this.$router.push({name: 'goodDetail', query: { id } });
       }
     }
@@ -77,8 +81,9 @@
   .image {
     width: 213px;
     height: 213px;
+    background-size: 100% 100%;
     border: 1px solid rgba(230, 230, 230, 1);
-
+    text-align: right;
   }
 
   .desc {
