@@ -155,6 +155,13 @@ export default {
   watch: {
     chooseAll: function (val) {
       if(this.chooseAll){
+        this.cartInfoList.map((item,index)=>{
+          return {
+            ...item,
+            checked:true,
+            key:index,
+          }
+        })
         this.multipleSelection = this.cartInfoList;
         this.total=0;
         this.multipleSelection.forEach(item => {
