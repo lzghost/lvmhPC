@@ -50,18 +50,11 @@
     <div v-else>
       <Search
         @on-focus="goToSearch"
-        @on-blur="showPro"
         ref="homeSearch"
       >
         <img @click="goToMenuMb" slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 6px;">
-        <group-title style="text-align: left"> 搜索历史 </group-title>
-        <grid :cols="3" :show-lr-borders="false">
-          <grid-item v-for="i in 6" :key="i">
-            <span class="grid-center">{{i}}</span>
-          </grid-item>
-        </grid>
       </Search>
-      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;" v-show="isSearch">
+      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
         <div v-for="good in showAllGoods" :key="good.id">
           <el-col :span="10" :offset="1">
             <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
@@ -99,7 +92,6 @@
         filter: {},
         type: 0,
         cat: 0,
-        isSearch: true,
       }
     },
     created(){
@@ -199,12 +191,8 @@
         console.log(1)
         // this.$refs.homeSearch.setBlur();
         // this.$router.push('/search')
-        this.isSearch = false
         this.$router.push('/search')
       },
-      showPro(){
-        this.isSearch = true
-      }
     },
   }
 </script>

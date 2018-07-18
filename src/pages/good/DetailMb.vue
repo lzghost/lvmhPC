@@ -1,9 +1,14 @@
 <template>
   <div class="detail-mb-wrapper">
     <el-main style="margin-bottom:60px;">
-      <swiper :min-moving-distance="moveDistance" class="swiper-mb">
-        <swiper-item v-for="item in productAndPic" :key="item.id">
-          <img :src="item.url160" style="width:100%;height:100%;">
+      <swiper
+        :min-moving-distance="moveDistance"
+        loop
+        :aspect-ratio="640/640"
+        dots-position="center"
+        class="swiper-mb">
+        <swiper-item v-for="item in productAndPic" >
+          <img :src="item.url640" class="swiper-image">
         </swiper-item>
       </swiper>
       <el-row :gutter="0">
@@ -24,7 +29,7 @@
           </el-row>
           <div class="des">{{ product.description }}
           </div>
-          <Norm v-if="spec == null"/>
+          <Norm v-if="spec && spec.length > 0"/>
           <el-row :gutter="10" style="margin-top: 20px;height: 28px;">
             <el-col :span="4" style="text-align: left;height: 28px;line-height: 28px;">数量</el-col>
             <el-col :span="7" style="text-align: right;font-size: 12px;color:#999999;height: 28px;line-height: 28px;">
@@ -88,7 +93,7 @@
         const result = [];
         this.productPic.map((item) => {
           this.products.map((good) => {
-            if (item.goodId === good.goodId) {
+            if (item.productId === good.id) {
               result.push({...item, ...good})
             }
           })
@@ -212,5 +217,12 @@
     color: rgba(255, 255, 255, 1);
     font-size: 16px;
     text-align: center;
+  }
+  .swiper-image{
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    width: 100vw;
+    min-height: 100%;
   }
 </style>

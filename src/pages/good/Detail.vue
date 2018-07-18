@@ -4,14 +4,14 @@
       <el-row style="margin-top: 40px;margin-bottom: 26px;">
         <el-col :offset="1" :span="12">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="(des,index) in bread" :key="index">{{ des }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="(des,index) in bread" >{{ des }}</el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
       <el-row :gutter="0">
         <el-col :span="10" :offset="2">
           <el-carousel arrow="always" :autoplay="false" height="474px">
-            <el-carousel-item v-for="item in productAndPic" :key="item.id" name="test">
+            <el-carousel-item v-for="item in productAndPic" name="test">
               <img :src="item.url640" class="image"/>
             </el-carousel-item>
           </el-carousel>
@@ -40,9 +40,14 @@
           </el-row>
           <el-row>
             <el-col style="text-align: left">
-              <el-button type="text" @click.native="addProToCart(product.id)">
+              <el-button v-if="product.stock > 0" type="text" @click.native="addProToCart(product.id)">
                 <div class="add">
                   <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购入车
+                </div>
+              </el-button>
+              <el-button v-else type="text">
+                <div class="add" style="background-color: #CCCCCC">
+                  售罄
                 </div>
               </el-button>
             </el-col>
@@ -100,7 +105,7 @@
       },
       bread() {
         const zhBread = ['内购']
-        this.categories.map((item) => {
+        this.categories.length && this.categories.map((item) => {
           if (item.id === this.product.productTypeId) {
             zhBread.push(item.name)
           }
@@ -136,7 +141,7 @@
           this.initCart({
             cartNum: this.count + this.cartList.cartNum,
           })
-          this.$
+          // this.$
           // let elLeft = event.target.getBoundingClientRect().left;
           // let elBottom = event.target.getBoundingClientRect().bottom;
           // this.showMoveDot.push(true);

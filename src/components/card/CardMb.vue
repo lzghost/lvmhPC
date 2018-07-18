@@ -1,6 +1,6 @@
 <template>
     <card>
-      <img slot="header" :src="goodInfo.pic" style="width:98%;height:99%;display:block;border: 1px solid rgba(230, 230, 230, 1);">
+      <img slot="header" :src="goodInfo.pic" style="min-height:143.547px;width:98%;height:99%;display:block;border: 1px solid rgba(230, 230, 230, 1);">
       <div slot="content" class="card-padding">
         <el-row :gutter="0" class="pro">
             <el-col :span="24">

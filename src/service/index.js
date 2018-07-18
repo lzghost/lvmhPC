@@ -82,3 +82,8 @@ export function cartInfo (campaignId) {
 export function orderPlace (campaignId,goodList) {
   return request(Api.orderPlace(campaignId), 'post',goodList)
 }
+
+//查询商品
+export function searchGoods (campaignId, param) {
+  return request(Api.search(campaignId), 'POST', param)
+}

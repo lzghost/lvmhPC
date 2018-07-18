@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <mt-index-list :show-indicator="noIndex">
-      <mt-index-section @click.native="goHomeWithFilter(categories[index].id)" :index="categories[index].name" v-for="index in Object.keys(categories)" :key="categories[index].id">
-        <mt-cell :title="item.name" @click.native.stop="goHomeWithFilter(categories[index].id, item.id)" :key="item.id" v-for="item in categories[index].children"></mt-cell>
+      <mt-index-section @click.native="goHomeWithFilter(categories[index].id)" :index="categories[index].name" v-for="index in Object.keys(categories)">
+        <mt-cell :title="item.name" @click.native.stop="goHomeWithFilter(categories[index].id, item.id)" v-for="item in categories[index].children"></mt-cell>
       </mt-index-section>
     </mt-index-list>
   </div>
