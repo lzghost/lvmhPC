@@ -38,7 +38,10 @@
       </el-col>
       <el-col :span="12">
         <div style="text-align: right">
-          <el-button type="text"><img src="../../assets/icon/cart.png" alt="" @click="changeVisible(goodInfo)"></el-button>
+          <el-button type="text">
+            <img v-if="goodInfo.stock <= 0"  src="../../assets/icon/add_no.png">
+            <img v-else src="../../assets/icon/cart.png" alt="" @click="changeVisible(goodInfo)">
+          </el-button>
         </div>
       </el-col>
     </el-row>

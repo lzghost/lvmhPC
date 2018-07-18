@@ -50,6 +50,10 @@ export function getProductPic (goodId) {
   return request(Api.goodPic(goodId))
 }
 
+export function updateCart(campaignId, param){
+  return request(Api.updateCart(campaignId), 'POST', param)
+}
+
 export function addCart (campaignId, param) {
   return request(Api.addCartProduct(campaignId), 'POST', param)
 }
@@ -80,7 +84,7 @@ export function cartInfo (campaignId) {
 
 // 查询购物车详情
 export function orderPlace (campaignId,goodList) {
-  return request(Api.orderPlace(campaignId), 'post',goodList)
+  return request(Api.orderPlace(campaignId), 'POST', goodList)
 }
 
 //查询商品

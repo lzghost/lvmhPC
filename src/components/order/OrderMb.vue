@@ -45,11 +45,11 @@
       </el-table-column>
     </el-table>
     <el-row class="calc-desc">
-      <el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3" class="count-desc">共 {{totalQty}} 件商品</el-col>
+      <el-col :xs="8" :sm="8" :md="4" :lg="3" :xl="3" class="count-desc">共 {{totalQty}} 件商品</el-col>
       <el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3">
         <span class="total-desc">实付:</span><span class="money">￥{{ amount }}</span>
       </el-col>
-      <el-col :xs="8" :sm="10" :md="8" :lg="15" :xl="17">&#12288;</el-col>
+      <el-col :xs="6" :sm="8" :md="8" :lg="15" :xl="17">&#12288;</el-col>
       <el-col v-if="status === 2" :xs="4" :sm="4" :md="4" :lg="3" :xl="1" style="height: 100%;text-align: right">
         <el-button type="text" class="pay" @click="payMoney(orderId)">付款</el-button>
       </el-col>

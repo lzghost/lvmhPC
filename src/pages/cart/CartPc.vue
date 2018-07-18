@@ -1,123 +1,129 @@
 <template>
-  <div class="container">
-    <div class="left-contain">
-      <div class="tab-subtitle">
-        <div class="cart-title">
-          购物车
-        </div>
-        <el-button class="cart-back" @click="goBack()">
-          继续购物
-        </el-button>
+  <el-row :gutter="0">
+    <el-col :offset="1" :span="15">
+      <div class="left-contain">
+        <div class="tab-subtitle">
+          <div class="cart-title">
+            购物车
+          </div>
+          <el-button class="cart-back" @click="goBack()">
+            继续购物
+          </el-button>
 
-      </div>
-      <el-table
-        ref="multipleTable"
-        :data="cartInfoList"
-        tooltip-effect="dark"
-        :show-header=false
-        style="width: 100%"
-        :row-style={height:120,padding:0}
-        @selection-change="handleSelectionChange">
-        <el-table-column
-          type="selection"
-          width="40"
-        >
-        </el-table-column>
-        <el-table-column
-          label="商品信息"
-          width="400">
-          <template slot-scope="scope">
-            <el-row type="flex" style="padding:20px">
-              <el-col class="align-left goods-pic">
-                <img width=80   height=80   :src="scope.row.pic" class="image">
-              </el-col>
-              <el-col style="margin-left: 20px">
-                <div class="goods-title align-left font-18">
-                  {{scope.row.name}}
-                </div>
-                <div class="goods-subtitle">
-                  <div class="goods-spec align-left font-14">
-                    规格：{{scope.row.spec1}}
+        </div>
+        <el-table
+          ref="multipleTable"
+          :data="cartInfoList"
+          tooltip-effect="dark"
+          :show-header=false
+          style="width: 100%"
+          :row-style={height:120,padding:0}
+          @selection-change="handleSelectionChange">
+          <el-table-column
+            type="selection"
+            width="40"
+          >
+          </el-table-column>
+          <el-table-column
+            label="商品信息"
+            width="400">
+            <template slot-scope="scope">
+              <el-row type="flex" style="padding:20px">
+                <el-col class="align-left goods-pic">
+                  <img width=80   height=80   :src="scope.row.pic" class="image">
+                </el-col>
+                <el-col style="margin-left: 20px">
+                  <div class="goods-title align-left font-18">
+                    {{scope.row.name}}
                   </div>
-                  <div class="goods-model align-left font-14">
-                    型号：{{scope.row.spec2}}
+                  <div class="goods-subtitle" v-if="scope.row.spec1">
+                    <div class="goods-spec align-left font-14">
+                      规格：{{scope.row.spec1}}
+                    </div>
+                    <div class="goods-model align-left font-14">
+                      型号：{{scope.row.spec2}}
+                    </div>
                   </div>
-                </div>
-              </el-col>
-            </el-row>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="数量"
-          show-overflow-tooltip>
-          <template slot-scope="scope">X{{ scope.row.qty }}</template>
-        </el-table-column>
-        <el-table-column
-          prop="address"
-          label="价格"
-          show-overflow-tooltip>
-          <template slot-scope="scope">X{{ scope.row.price }}</template>
-        </el-table-column>
-      </el-table>
-      <div class="button-contain">
-        <el-button @click="toggleSelection(cartInfoList)">全选</el-button>
-        <el-button @click="toggleSelection()">取消选择</el-button>
+                </el-col>
+              </el-row>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="数量"
+            width="145"
+          >
+            <template slot-scope="scope">
+              <el-input-number
+                size="mini"
+                v-model="scope.row.qty"
+                :min="1"
+                @change="changeCount(scope.row)"
+              ></el-input-number>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="价格"
+          >
+            <template slot-scope="scope">￥{{ scope.row.price }}</template>
+          </el-table-column>
+          <el-table-column
+          >
+            <template slot-scope="scope">
+              <el-button @click="deletePro(scope.row)" type="text" size="small">
+                <img src="../../assets/icon/delete.png" >
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="button-contain">
+          <el-button @click="toggleSelection(cartInfoList)" size="small">全选</el-button>
+          <!--<el-button @click="toggleSelection()">取消选择</el-button>-->
+        </div>
       </div>
-    </div>
-    <div class="right-contain">
-      <div class="total-contain">
-        <div class="total">总计:</div>
-        <div class="total-num">¥{{total}}</div>
+    </el-col>
+    <el-col :span="6" :offset="1">
+      <div class="right-contain">
+        <div class="total-contain">
+          <div class="total">总计:</div>
+          <div class="total-num">¥{{ total }}</div>
+        </div>
+        <div class="desc-text">已选择{{multipleSelection.length}}件商品</div>
+        <el-button class="submit" :disabled="submitFilter(multipleSelection.length)"   @click="submitData">提交订单</el-button>
       </div>
-      <div class="desc-text">已选择{{multipleSelection.length}}件商品</div>
-      <el-button class="submit" :disabled="submitFilter(multipleSelection.length)"   @click="submitData">提交订单</el-button>
-    </div>
-  </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import {cartInfo,orderPlace} from '@/service/index'
+  import { cartInfo, orderPlace, updateCart, getCartNum } from '@/service/index'
 
   export default {
-    name: 'Home',
     data() {
       return {
         multipleSelection: [],
         total: 0,
-        cartInfoList: [
-          {
-            campaignId: 8,
-            campaignType: 1,
-            enName:
-              "XMAS JAD EDP JEWEL BOX 100ML INT16",
-            goodId: 659,
-            id: 56044,
-            name: "克丽丝汀迪奥真我香水套装 F918501000",
-            originPrice: 1500,
-            pic: "http://yimtest.oss-cn-shanghai.aliyuncs.com/3061e713-c3ad-477c-86d0-e8d0bee3143d.png?x-oss-process=image/resize,w_320,h_320,m_pad",
-            price: 600,
-            productCategoryId: 72,
-            productId: 653,
-            productTypeId:19,
-            qty: 3,
-            spec1: "",
-            spec2: "",
-            userId: "et6Eu6FZ"
-          }
-        ],
+        selectAll: false,
+        cartInfoList: [],
       }
     },
-    methods: {
+    computed: {
       ...mapState([
         'global','categories','campaign', 'bread', 'goods'
       ]),
+    },
+    methods: {
+      ...mapMutations({
+        initCartNum: 'INIT_CART_NUM',
+      }),
       toggleSelection(rows) {
-        if (rows) {
+        if (rows && !this.selectAll) {
+          this.selectAll = true;
           rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
+            this.$refs.multipleTable.toggleRowSelection(row, true);
           });
         } else {
+          this.selectAll = false
           this.$refs.multipleTable.clearSelection();
         }
       },
@@ -125,8 +131,25 @@
         this.multipleSelection = val;
         this.total = 0;
         val.forEach(item => {
-          this.total = this.total + parseInt(item.price);
+          this.total = this.total + parseFloat(item.price) * parseInt(item.qty);
         })
+      },
+      async changeCount(row){
+        const param = {};
+        param.items = [];
+        param.items.push({
+          qty: row.qty,
+          productId: row.productId
+        })
+        const res = await updateCart(this.campaign.id, param)
+        if(res.status === 0 ){
+          this.total = 0;
+          this.$refs.multipleTable.selection.forEach(item => {
+            this.total = this.total + parseFloat(item.price) * parseInt(item.qty);
+          })
+          const cartRes = await getCartNum(this.campaign.id)
+          this.initCartNum({ cartNum: cartRes.data })
+        }
       },
       submitData() {
         this.$confirm('一个人只有2次下单机会，一经付款，订单就不可取消和修改，您依然确定要下单吗？', '提示', {
@@ -157,13 +180,34 @@
           this.cartInfoList = res.data
         }
       },
-      async orderPlace(list) {
-        const res = await orderPlace(this.campaign.id,list);
+      async orderPlace() {
+        const param = {};
+        param.items = [];
+        this.multipleSelection.map(item => {
+          param.items.push({
+            productId: item.productId,
+            qty: item.qty
+          })
+        })
+        const res = await orderPlace(this.campaign.id, param);
         console.log('cartInfoList', res);
         if (res.status === 0) {
-          return res.data
+          this.$router.push(`/orderDetail/${res.data.order.id}`)
         }
       },
+      async deletePro(row){
+        const param = {};
+        param.items = [];
+        param.items.push({
+          qty: 0,
+          productId: row.productId
+        })
+        const res = await updateCart(this.campaign.id, param)
+        if(res.status === 0){
+          const cartRes = await getCartNum(this.campaign.id)
+          this.initCartNum({ cartNum: cartRes.data })
+        }
+      }
     },
     mounted() {
       this.getCartInfo();
@@ -181,6 +225,10 @@
     height: 100%;
   }
 
+  .left-contain{
+    flex-grow: 1;
+  }
+
   .tab-subtitle {
     display: flex;
     flex-direction: row;
@@ -191,11 +239,6 @@
     border-bottom: 2px solid #E6E6E6;
   }
 
-  .left-contain {
-    padding-left: 149px;
-    width: 800px;
-  }
-
   .right-contain {
     padding: 20px;
     margin-top: 24px;
@@ -203,6 +246,7 @@
     height: 132px;
     border-radius: 2px;
     background-color: rgba(244, 244, 244, 1);
+    flex-grow: 1;
   }
 
   .cart-title {
@@ -257,6 +301,7 @@
 
   .button-contain {
     margin: 30px 0 0 0;
+    text-align: left;
   }
 
   .submit {

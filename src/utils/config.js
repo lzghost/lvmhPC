@@ -16,7 +16,7 @@ const Api = {
   goodPic: goodId => `${hostStore}good/${goodId}/pictures`, //宝贝下不同商品图片
   cartNum: campaignId => `${hostStore}cartNum/${campaignId}`, //购物车数量
   cartInfo: campaignId => `${hostStore}cart/${campaignId}`,//获取购物车详情
-  defaultCartProduct: campaignId => `${hostStore}cart/${campaignId}/modify`,//添加商品 POST
+  updateCart: campaignId => `${hostStore}cart/${campaignId}/modify`,//添加商品 POST
   addCartProduct: campaignId => `${hostStore}cart/${campaignId}/add`,//添加商品 POST
   ordersStats: `${hostStore}order/stats`,//订单状态
   orderList: campaignId => `${hostStore}order/list`,//所有订单

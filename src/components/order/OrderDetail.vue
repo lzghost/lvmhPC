@@ -2,7 +2,7 @@
   <div>
     <div class="order-detail-wrapper" v-if="global.isPc">
       <el-row>
-        <el-col :span="18" :offset="3">
+        <el-col :span="20" :offset="2">
           <el-row style="height: 42px; line-height: 42px;">
             <el-col :span="12">
               <div class="order-detail-title">订单详情</div>
@@ -16,13 +16,13 @@
               <el-card>
                 <div slot="header" class="order-hook clearfix">
                   <el-row>
-                    <el-col :span="6">
+                    <el-col :span="8">
                       <div class="order-num">订单号：{{orderDetail.orderNo}}</div>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="8">
                       <div class="order-date">下单时间：{{orderDetail.orderDate | timeFormat}}</div>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="8">
                       <div class="order-status" v-if="orderDetail.status === 11">已签收</div>
                       <div class="order-status" v-else>
                         <el-button type="text">取消订单</el-button>
@@ -35,13 +35,13 @@
                     <el-col :span="2">
                       <div class="left-label">收&nbsp;&nbsp;货&nbsp;&nbsp;人：</div>
                     </el-col>
-                    <el-col :span="18">
+                    <el-col :span="16">
                       <div class="left-cont">{{orderDetail.userName}}</div>
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="3">
                       <div class="right-label">付款方式：</div>
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="3">
                       <div class="right-cont">{{orderDetail.payMethod}}</div>
                     </el-col>
                   </el-row>
@@ -51,13 +51,13 @@
                     <el-col :span="2">
                       <div class="left-label">手机号码：</div>
                     </el-col>
-                    <el-col :span="18">
+                    <el-col :span="16">
                       <div class="left-cont">{{orderDetail.mobile}}</div>
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="3">
                       <div class="right-label">商品合计：</div>
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="3">
                       <div class="right-cont">￥{{orderDetail.amount}}</div>
                     </el-col>
                   </el-row>
@@ -70,32 +70,34 @@
                     <el-col :span="18">
                       <div class="left-cont">{{orderDetail.address}}</div>
                     </el-col>
-                    <el-col :span="2">
-                      <div class="right-label">已折扣：</div>
-                    </el-col>
-                    <el-col :span="2">
-                      <div class="right-cont">￥{{orderDetail.amount}}</div>
-                    </el-col>
+                    <!--<el-col :span="2">-->
+                      <!--<div class="right-label">已折扣：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="2">-->
+                      <!--<div class="right-cont">￥{{orderDetail.amount}}</div>-->
+                    <!--</el-col>-->
                   </el-row>
                 </div>
                 <div class="text item">
                   <el-row>
-                    <el-col :span="19" style="height: 26px;"></el-col>
-                    <el-col :span="5" style="border-bottom: 1px solid #979797; height: 26px;"></el-col>
+                    <el-col :span="18" style="height: 26px;"></el-col>
+                    <el-col :span="6" style="border-bottom: 1px solid #979797; height: 26px;"></el-col>
                   </el-row>
                 </div>
                 <div class="text item">
                   <el-row style="padding: 29px 0 11px;">
-                    <el-col :span="20" class="hook-height"></el-col>
-                    <el-col :span="2" class="hook-height paid-label">实付金额：</el-col>
-                    <el-col :span="2" class="hook-height paid-money">￥{{orderDetail.amount}}</el-col>
+                    <el-col :span="18" class="hook-height"></el-col>
+                    <el-col :span="3" class="hook-height paid-label">实付金额：</el-col>
+                    <el-col :span="3" class="hook-height paid-money">￥{{orderDetail.amount}}</el-col>
                   </el-row>
                 </div>
-                <div class="text item" v-if="orderDetail.status === 2">
+                <div class="text item" v-if="orderDetail.status === 1">
                   <el-row>
                     <el-col :span="20" class="hook-height"></el-col>
                     <el-col :span="4" style="text-align: right">
-                      <el-button class="pay-money" @click="payMoney(orderDetail.id)">付款</el-button>
+                      <el-button class="pay-money" size="small" @click="payMoney(orderDetail.id)">
+                        付款
+                      </el-button>
                     </el-col>
                   </el-row>
                 </div>
@@ -267,7 +269,8 @@
         }
       },
       payMoney (orderId) {
-        this.$router.push({path: '/pay/' + orderId})
+        // this.$router.push({path: '/pay/' + orderId})
+        window.location.href = '/is/p/qrPay/'+ orderId;
       }
     }
   }
@@ -364,8 +367,6 @@
   }
 
   .pay-money {
-    width: 200px;
-    height: 50px;
     border: none;
     border-radius: 4px;
     font-weight: 400;
@@ -570,12 +571,4 @@
     text-align: right;
   }
 
-  .el-button {
-    width: 135px;
-    height: 50px;
-    border-radius: 0;
-    background-color: #D7B25A;
-    font-size: 14px;
-    color: #ffffff;
-  }
 </style>

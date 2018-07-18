@@ -181,7 +181,6 @@ export default {
 .nav-good {
   height: 49px;
   background-color: rgba(255, 255, 255, 1);
-  box-shadow: undefined, inset 0px 0.5px 0px 0px rgba(0, 0, 0, 0.25);
   position: fixed;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#d9d9d9), color-stop(50%, #d9d9d9), color-stop(50%, transparent));
     background-image: linear-gradient(180deg, #d9d9d9, #d9d9d9 50%, transparent 50%);
