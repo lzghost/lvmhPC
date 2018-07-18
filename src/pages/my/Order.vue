@@ -4,10 +4,10 @@
       <el-main>
         <el-row class="profile">
           <el-col :span="8" :offset="8">
-            <img src="../../assets/profile.png" width="122" height="122" style="margin-top: 32px"/>
-            <div class="name">
-              Erik Banks
+            <div class="head-portrait">
+              <img :src="userInfo.head" width="122" height="122"/>
             </div>
+            <div class="name">{{userInfo.name}}</div>
           </el-col>
         </el-row>
         <el-row>
@@ -67,10 +67,10 @@
     <div v-else>
       <el-row class="mb-profile">
         <el-col :span="8" :offset="8">
-          <img src="../../assets/profile.png" width="122" height="122" style="margin-top: 32px"/>
-          <div class="mb-name">
-            Erik Banks
+          <div class="head-portrait">
+            <img :src="userInfo.head" width="122" height="122"/>
           </div>
+          <div class="mb-name">{{userInfo.name}}</div>
         </el-col>
       </el-row>
       <el-row>
@@ -105,7 +105,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex'
-  import { orderList } from '@/service/index'
+  import { orderList, userInfo } from '@/service/index'
 
   import Order from '@/components/order/Order.vue'
 
@@ -113,6 +113,7 @@
     name: 'Home',
     data () {
       return {
+        userInfo: {},
         orderList: []
       }
     },
@@ -121,9 +122,10 @@
     },
     mounted () {
       this.getOrderList()
+      this.getUserInfo()
     },
     computed: {
-      ...mapState(['global']),
+      ...mapState(['global', 'campaign']),
       getNoPaiedOrder () {
         return this.orderList.filter(order => order.status === 2)
       },
@@ -136,6 +138,12 @@
         const res = await orderList()
         if (res.status === 0) {
           this.orderList = res.data
+        }
+      },
+      async getUserInfo () {
+        const res = await userInfo(this.campaign.id)
+        if (res.status === 0) {
+          this.userInfo = res.data
         }
       }
     }
@@ -164,6 +172,16 @@
     letter-spacing: .3em;
     font-size: 14px;
     font-weight: 700;
+  }
+
+  .head-portrait {
+    width: 122px;
+    height: 122px;
+    margin: 32px auto 0;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   .mb-profile {

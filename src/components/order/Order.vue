@@ -78,7 +78,7 @@
     <el-dialog
       title="提示"
       width="30%"
-      modal="true"
+      :modal="true"
       :show-close="false"
       :visible.sync="dialogVisible"
       :before-close="cancelOrder">
