@@ -30,7 +30,7 @@ export const removeStore = name => {
 
 
 //设备检测  是移动端返回true；PC端返回false
-export function detect() {
+function detect() {
   if( navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)
     || navigator.userAgent.match(/iPhone/i)
@@ -43,6 +43,8 @@ export function detect() {
   }
   return true;
 }
+
+export const device = detect()
 
 export function pushChildren(parent, children){
   children.map((child) => {

@@ -206,6 +206,7 @@
         if(res.status === 0){
           const cartRes = await getCartNum(this.campaign.id)
           this.initCartNum({ cartNum: cartRes.data })
+          this.getCartInfo()
         }
       }
     },

@@ -30,18 +30,26 @@
       <div class="content"></div>
       <div class="logo-mb"></div>
       <div class="loginFormStyle-mb">
-        <mt-cell>
-          <mt-field label="" v-model="loginForm.userName" placeholder="请输入用户名" >
-          </mt-field>
-          <img slot="icon" src="../../assets/mobile/user.png" width="21" height="24">
-        </mt-cell>
-        <mt-cell>
-          <mt-field label="" v-model="loginForm.passWord" placeholder="请输入密码" >
-          </mt-field>
-          <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
-        </mt-cell>
+        <el-row>
+          <el-col :span="20" :offset="2">
+            <mt-cell>
+              <mt-field label="" v-model="loginForm.userName" placeholder="请输入用户名" >
+              </mt-field>
+              <img slot="icon" src="../../assets/mobile/userlogin.png" width="21" height="24">
+            </mt-cell>
+            <mt-cell>
+              <mt-field label="" v-model="loginForm.passWord" type="password" placeholder="请输入密码" >
+              </mt-field>
+              <img slot="icon" src="../../assets/mobile/password.png" width="21" height="24">
+            </mt-cell>
+          </el-col>
+        </el-row>
       </div>
-      <mt-button plain type="default" size="large" @click="doLogin">登录</mt-button>
+      <el-row>
+        <el-col :span="20" :offset="2">
+          <mt-button plain type="default" size="large" @click="doLogin">登录</mt-button>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -169,5 +177,6 @@ export default {
 .mint-button{
   color: white;
   background-color: transparent;
+  border: 1px solid white;
 }
 </style>

@@ -4,14 +4,14 @@
       <el-row style="margin-top: 40px;margin-bottom: 26px;">
         <el-col :offset="1" :span="12">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="(des,index) in bread" >{{ des }}</el-breadcrumb-item>
+            <el-breadcrumb-item :key="index" v-for="(des,index) in bread" >{{ des }}</el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
       <el-row :gutter="0">
         <el-col :span="10" :offset="2">
           <el-carousel arrow="always" :autoplay="false" height="474px">
-            <el-carousel-item v-for="item in productAndPic" name="test">
+            <el-carousel-item v-for="item in productAndPic" :key="item.productId" name="test">
               <img :src="item.url640" class="image"/>
             </el-carousel-item>
           </el-carousel>
@@ -42,7 +42,7 @@
             <el-col style="text-align: left">
               <el-button v-if="product.stock > 0" type="text" @click.native="addProToCart(product.id)">
                 <div class="add">
-                  <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购入车
+                  <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购物车
                 </div>
               </el-button>
               <el-button v-else type="text">

@@ -1,19 +1,40 @@
 import fetch from 'isomorphic-fetch';
+import Vue from 'vue'
 import qs from 'qs'
+import { device } from './storage'
 import { NetErrorMsg } from './config'
 
-
+let jumpFlag = true;
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
       return response;
     }
-    // notification.error({
-    //   message: `请求错误 ${response.status}: ${response.url}`,
-    //   description: response.statusText,
-    // });
+
+    if (response.status >= 400 && response.status <500){
+      Vue.router.push('/login')
+    }
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
+  }
+
+  function checkLogin(response){
+    console.log(response)
+    if (response.status == -100 && !device ) {
+      var url = encodeURIComponent(window.location)
+      if (jumpFlag) {
+        jumpFlag = false
+        var cid = 0
+        if (!!Vue.router.currentRoute.params.cid){
+          cid = Vue.router.currentRoute.params.cid
+        }
+
+        window.location = '/is-dev/auth/entrance/' + (cid) + '?jumpUrl=' + url
+        return response;
+      }
+      return response
+    }
+    return response
   }
 /**
  * Requests a URL, returning a promise.
@@ -49,6 +70,7 @@ export default function request(url, method, param) {
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => response.json())
+    .then(checkLogin)
     .catch((error) => {
       if (error.code) {
         // Toast.fail(error.message, 3, null, true)

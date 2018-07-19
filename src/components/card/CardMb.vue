@@ -1,6 +1,6 @@
 <template>
     <card>
-      <img slot="header" :src="goodInfo.pic" style="min-height:143.547px;width:98%;height:99%;display:block;border: 1px solid rgba(230, 230, 230, 1);">
+      <img slot="header" :src="goodInfo.pic" class="card-image">
       <div slot="content" class="card-padding">
         <el-row :gutter="0" class="pro">
             <el-col :span="24">
@@ -67,5 +67,13 @@ export default {
     font-size: 12px;
     text-align: left;
     text-decoration:line-through;
+  }
+  .card-image{
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    width: 45vw;
+    min-height: 100%;
+    border: 1px solid rgba(230, 230, 230, 1);
   }
 </style>

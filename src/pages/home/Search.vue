@@ -5,7 +5,7 @@
       @on-cancel="goBack"
       placeholder="搜索您感兴趣的商品"
       auto-fixed
-      @@on-submit="doSearch"
+      @on-submit="doSearch"
       @on-clear="clearSearch"
       v-model="keyword"
     >
@@ -15,9 +15,9 @@
           <span class="grid-center">{{i}}</span>
         </grid-item>
       </grid>
-      <cell-box v-show="showHistory" is-link v-for="item in searchResult" @click.native="saveThisHistory">
-        {{ item.name }}
-      </cell-box>
+      <!--<cell-box v-show="showHistory" is-link v-for="item in searchResult" @click.native="saveThisHistory">-->
+        <!--{{ item.name }}-->
+      <!--</cell-box>-->
     </Search>
   </div>
 </template>

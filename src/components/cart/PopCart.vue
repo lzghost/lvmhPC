@@ -23,36 +23,36 @@
         </el-col>
       </el-row>
     </div>
-    <div class="body" v-if="Object.keys(spec).length > 0">
-      <div>规格</div>
-      <el-row :gutter="20" style="margin-top: 5px;">
-        <el-col :span="5">
-          <div class="active-capacity">
-            50ml
-          </div>
-        </el-col>
-        <el-col :span="5">
-          <div class="capacity">
-            100ml
-          </div>
-        </el-col>
-      </el-row>
-      <div style="margin-top: 15px;">
-        型号
-      </div>
-      <el-row :gutter="20" style="margin-top: 6px;">
-        <el-col :span="2">
-          <div class="active-type">
-            01
-          </div>
-        </el-col>
-        <el-col :span="2">
-          <div class="type">
-            02
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+    <!--<div class="body" v-if="Object.keys(spec).length > 0">-->
+      <!--<div>规格</div>-->
+      <!--<el-row :gutter="20" style="margin-top: 5px;">-->
+        <!--<el-col :span="5">-->
+          <!--<div class="active-capacity">-->
+            <!--50ml-->
+          <!--</div>-->
+        <!--</el-col>-->
+        <!--<el-col :span="5">-->
+          <!--<div class="capacity">-->
+            <!--100ml-->
+          <!--</div>-->
+        <!--</el-col>-->
+      <!--</el-row>-->
+      <!--<div style="margin-top: 15px;">-->
+        <!--型号-->
+      <!--</div>-->
+      <!--<el-row :gutter="20" style="margin-top: 6px;">-->
+        <!--<el-col :span="2">-->
+          <!--<div class="active-type">-->
+            <!--01-->
+          <!--</div>-->
+        <!--</el-col>-->
+        <!--<el-col :span="2">-->
+          <!--<div class="type">-->
+            <!--02-->
+          <!--</div>-->
+        <!--</el-col>-->
+      <!--</el-row>-->
+    <!--</div>-->
     <el-row :gutter="20" style="margin-top: 20px;height: 28px;">
       <el-col :span="4" style="text-align: left;height: 28px;line-height: 28px;">数量</el-col>
       <el-col :span="12" style="text-align: right;font-size: 12px;color:#999999;height: 28px;line-height: 28px;">
@@ -65,7 +65,7 @@
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="addToCart(product.id, $event)">
         <div class="add">
-          <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购入车
+          <img src="../../assets/icon/cart.png" class="cartIcon"/>加入购物车
         </div>
       </el-button>
     </div>

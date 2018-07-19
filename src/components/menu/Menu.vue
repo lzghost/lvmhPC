@@ -1,20 +1,18 @@
 <template>
   <el-row :gutter="0" class="menu-wrapper">
-    <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2"></el-col>
-    <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="2">
+    <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="1"></el-col>
+    <el-col :xs="4" :sm="4" :md="2" :lg="1" :xl="1">
       <router-link :to="{path: '/campaigns'}">
         <el-button type="text">LVMH</el-button>
       </router-link>
     </el-col>
-    <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu, index) in menuData">
+    <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu, index) in menuData" :key="index">
       <Type :menu="menu"/>
     </el-col>
-    <el-col v-if="menuData.length < 3" :xs="4" :sm="4" :md="2" :lg="2" :xl="2" v-for="(menu) in 3-menuData.length" :key="menu">
-    </el-col>
-    <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="2">
+    <el-col  :xs="4" :sm="4" :md="5" :lg="menuLength" :xl="menuLength">
 
     </el-col>
-    <el-col :xs="4" :sm="4" :md="5" :lg="7" :xl="2" style="text-align: right">
+    <el-col :xs="4" :sm="4" :md="5" :lg="4" :xl="4" style="text-align: right">
       <el-button
         v-show="searchState"
         @click.native="changeSearchState"
@@ -36,7 +34,7 @@
         <i slot="prefix" class="el-input__icon el-icon-search" @click="searchStateTrue"></i>
       </el-input>
     </el-col>
-    <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="2">
+    <el-col  :xs="4" :sm="4" :md="5" :lg="1" :xl="1">
 
     </el-col>
     <el-col :xs="4" :sm="4" :md="3" :lg="2" :xl="2" clas="nav">
@@ -91,6 +89,9 @@
           return this.cartList.cartNum > 99 ? '99+' : this.cartList.cartNum;
         }
         return 0
+      },
+      menuLength() {
+        return 10 - (this.menuData.length*2)
       }
     },
     watch:{

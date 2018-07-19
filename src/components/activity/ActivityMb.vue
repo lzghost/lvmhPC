@@ -4,7 +4,9 @@
         <el-row style="height:100%;">
             <el-col :span="5" :offset="19" class="next">
                 <div class="display" style="height:100%;width:100%;" >Next
-                    <div>--></div>
+                    <div>
+                      <img src="../../assets/icon/left.png"/>
+                    </div>
                 </div>
             </el-col>
         </el-row>

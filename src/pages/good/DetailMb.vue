@@ -7,7 +7,7 @@
         :aspect-ratio="640/640"
         dots-position="center"
         class="swiper-mb">
-        <swiper-item v-for="item in productAndPic" >
+        <swiper-item v-for="item in productAndPic" :key="item.productId">
           <img :src="item.url640" class="swiper-image">
         </swiper-item>
       </swiper>

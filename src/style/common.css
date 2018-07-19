@@ -70,6 +70,27 @@ a{
   color: white;
 }
 
+.login-mb-wrapper .mint-cell{
+  border-bottom: 1px solid white;
+}
+
+.login-mb-wrapper a.mint-cell{
+  border-bottom: none;
+}
+
+.mint-cell:last-child{
+  background-image: none;
+}
+
+.login-mb-wrapper .mint-cell-value .mint-cell-wrapper{
+  border-bottom: none;
+}
+
+.login-mb-wrapper .mint-cell-wrapper{
+  border-bottom: 1px solid white;
+  background-image: none;
+}
+
 .login-mb-wrapper input{
   background-color: transparent;
   color: white;
@@ -84,7 +105,7 @@ a{
   flex: 0.3 !important;
 }
 
-nput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   /* WebKit browsers */
  color: rgb(253, 250, 250);
  }
@@ -171,3 +192,8 @@ nput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 .detail-mb-wrapper .el-badge__content.is-fixed{
   top: 13px;
 }
+
+.weui-panel:after{
+  border: none;
+}
+

@@ -22,10 +22,10 @@ export default {
   data() {
     return {
         selected: 'activity',
-        activityIcon : require('../../assets/mobile/home.png'),
-        catIcon: require('../../assets/mobile/cat.png'),
+        activityIcon : require('../../assets/mobile/home-mb-select.png'),
+        catIcon: require('../../assets/mobile/cata.png'),
         cartIcon: require('../../assets/mobile/cart.png'),
-        myIcon: require('../../assets/mobile/my-mb-select.png'),
+        myIcon: require('../../assets/mobile/user.png'),
     };
   },
   async beforeMount() {},
@@ -69,13 +69,13 @@ export default {
               this.activityIcon = require('../../assets/mobile/home.png')
               break;
               case 'cat':
-              this.catIcon = require('../../assets/mobile/cat.png')
+              this.catIcon = require('../../assets/mobile/cata.png')
               break;
               case 'cart':
               this.cartIcon = require('../../assets/mobile/cart.png')
               break;
               case 'my':
-              this.myIcon = require('../../assets/mobile/my-mb-select.png')
+              this.myIcon = require('../../assets/mobile/user.png')
               break;
           }
       }

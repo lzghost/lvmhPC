@@ -47,22 +47,40 @@
         :productPic="productPic"
       />
     </div>
-    <div v-else>
+    <div v-else style="background-color: white">
       <Search
         @on-focus="goToSearch"
         ref="homeSearch"
       >
-        <img @click="goToMenuMb" slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto 6px;">
+        <img @click="goToMenuMb" slot="left" src="../../assets/mobile/menu.png" height="13px" width="15px" style="margin:auto; margin-right: 8px;">
       </Search>
-      <el-row :gutter="0" style="margin-bottom:60px;margin-top:15px;">
-        <div v-for="good in showAllGoods" :key="good.id">
-          <el-col :span="10" :offset="1">
-            <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
-          </el-col>
-          <el-col :span="1">
-            &#12288;
-          </el-col>
-        </div>
+      <el-row style="margin-bottom:60px;margin-top:15px;">
+        <el-col :span="12">
+          <el-row
+            :gutter="0"
+            type="flex"
+            justify="space-around"
+            v-for="(good,index) in firstCol"
+            :key="good.id"
+          >
+            <el-col :span="22" :offset="1">
+              <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="12">
+          <el-row
+            :gutter="0"
+            type="flex"
+            justify="space-around"
+            v-for="(good,index) in secondCol"
+            :key="good.id"
+          >
+            <el-col :span="22">
+              <CardMb :goodInfo="good" @click.native="goToDetails(good.id)"/>
+            </el-col>
+          </el-row>
+        </el-col>
       </el-row>
     </div>
   </div>
@@ -92,17 +110,36 @@
         filter: {},
         type: 0,
         cat: 0,
+        firstCol: [],
+        secondCol: [],
+        searchDefault: '搜索'
       }
     },
     created(){
       this.reload()
       this.type = parseInt(this.$route.query.type || 0)
       this.cat = parseInt(this.$route.query.cat || 0)
+      const length = this.goods.length;
+      if(length % 2 === 0){
+        this.firstCol = this.goods.slice(0, length/2)
+        this.secondCol = this.goods.slice(length/2, length)
+      }else{
+        this.firstCol = this.goods.slice(0, parseInt(length/2) + 1)
+        this.secondCol = this.goods.slice(parseInt(length/2) + 1, length)
+      }
     },
     activated(){
       this.reload()
       this.type = parseInt(this.$route.query.type || 0)
       this.cat = parseInt(this.$route.query.cat || 0)
+      const length = this.goods.length;
+      if(length % 2 === 0){
+        this.firstCol = this.goods.slice(0, length/2)
+        this.secondCol = this.goods.slice(length/2, length)
+      }else{
+        this.firstCol = this.goods.slice(0, parseInt(length/2) + 1)
+        this.secondCol = this.goods.slice(parseInt(length/2) + 1, length)
+      }
     },
     mounted(){
     },
