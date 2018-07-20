@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!--<check-list-mb-->
-      <!--:options="cartInfoList"-->
-      <!--style="margin-bottom:115px;"-->
-    <!--&gt;</check-list-mb>-->
     <div class="checklist-mb-wrapper">
       <el-row
         v-for="(one, index) in cartInfoList"
@@ -43,9 +39,10 @@
     <el-row class="nav-good">
       <el-col :span="7" style="height:100%">
         <check-icon
-          :value.sync="demo1"
+          :value.sync="allCheck"
           style="margin-top:13px;"
-        >全选</check-icon>
+        >全选
+        </check-icon>
       </el-col>
       <el-col :span="7" style="height:100%">
         <div class="total">
@@ -53,23 +50,27 @@
         </div>
       </el-col>
       <el-col :span="9" :offset="1">
-        <div class="cart">立即购买</div>
+        <div
+          class="cart"
+          @click="submitData"
+        >立即购买
+        </div>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
-  import {CheckIcon} from 'vux'
-  import {cartInfo, orderPlace, updateCart, getCartNum} from '@/service/index'
-
+  import { mapState, mapMutations } from 'vuex'
+  import { CheckIcon } from 'vux'
+  import { cartInfo, orderPlace, updateCart, getCartNum } from '@/service/index'
+  import index from '../../router/index'
 
   export default {
-    data() {
+    data () {
       return {
         temp: [],
-        demo1: false,
+        allCheck: false,
         total: 0,
         cartInfoList: []
       }
@@ -79,30 +80,79 @@
         'global', 'categories', 'campaign', 'bread', 'goods'
       ]),
     },
-    mounted() {
+    mounted () {
       this.getCartInfo()
     },
     components: {
       CheckIcon,
     },
     methods: {
-      async getCartInfo() {
+      ...mapMutations({
+        initCartNum: 'INIT_CART_NUM',
+      }),
+      async getCartInfo () {
         const res = await cartInfo(this.campaign.id)
         if (res.status === 0) {
           res.data.map(item => item.checked = false)
           this.cartInfoList = res.data
         }
       },
+      async changeCount (row) {
+        const param = {}
+        param.items = []
+        param.items.push({
+          qty: row.qty,
+          productId: row.productId
+        })
+        const res = await updateCart(this.campaign.id, param)
+        if (res.status === 0) {
+          const cartRes = await getCartNum(this.campaign.id)
+          this.initCartNum({cartNum: cartRes.data})
+        }
+      },
+      submitData () {
+        this.$confirm('一个人只有2次下单机会，一经付款，订单就不可取消和修改，您依然确定要下单吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          const id = this.orderPlace(this.multipleSelection)
+          this.$router.push({
+            name: 'cartmb',
+            query: {id: id}
+          })
+        }).catch(() => {
+
+        })
+      }
     },
     watch: {
       cartInfoList: {
         deep: true,
-        handler: function(val, oldVal){
-          console.log(val);
+        handler: function (val, oldVal) {
+          this.total = 0
+          let status = true;
+          val.map(item => {
+            if (item.checked) {
+              this.total = this.total + parseFloat(item.price) * parseInt(item.qty)
+            }else{
+              status = false
+            }
+          })
+          this.allCheck = status
         }
       },
-      demo1() {
-        console.log(2)
+      allCheck (val, oldVal) {
+        let status = 0;
+        this.cartInfoList.map(item => {
+          if (item.checked) {
+            status ++
+          }else{
+            status --
+          }
+        })
+        if(Math.abs(status) === this.cartInfoList.length)
+        this.cartInfoList.map(item => item.checked = val)
       }
     }
   }
